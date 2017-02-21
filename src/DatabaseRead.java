@@ -28,6 +28,13 @@ public class DatabaseRead
             Class.forName(driver);
             conn = DriverManager.getConnection(url,user,pwd);
             st = conn.createStatement();
+
+
+
+
+
+
+
             rs = st.executeQuery(sql);
 
             while(rs.next())
