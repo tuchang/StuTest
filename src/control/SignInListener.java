@@ -1,7 +1,9 @@
 package control;
 
 import model.LoginDatabase;
+import view.Admin;
 import view.Login;
+import view.StuManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,17 +53,17 @@ public class SignInListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         LoginData lg = new LoginDatabase().getLoginData(Login.username.getText());
-
+        view.Login.loginWindow.setVisible(false);
 
 
         //System.out.println(type.getSelectedIndex());
-        if (lg.getPwd().equals(password.getText()))
+        //if (lg.getPwd().equals(password.getText()))
         {
             switch (Login.type.getSelectedIndex())
             {
-                case 0:
+                case 0:new Admin().adminView();
                     break;
-                case 1:
+                case 1: new view.StuManager().view();
                     break;
                 case 2:
                     break;

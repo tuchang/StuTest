@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
  * Created by tuchang on 22/02/2017.
  */
 public class Login {
-    static JFrame loginWindow = new JFrame("欢迎登录");
+    public static JFrame loginWindow = new JFrame("欢迎登录");
     public static JTextField username = new JTextField("请输入用户名");
     public static JTextField password = new JTextField("请输入密码");
     public static JComboBox type = new JComboBox();
