@@ -63,7 +63,7 @@ public class SignInListener implements ActionListener
             {
                 case 0:new Admin().adminView();
                     break;
-                case 1: new view.StuManager().view();
+                case 1: ;
                     break;
                 case 2:
                     break;

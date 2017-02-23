@@ -34,5 +34,26 @@ public class Admin {
                 new UserManager().view();
             }
         });
+
+        stuManageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new view.StuManager().view();
+            }
+        });
+
+        courseManageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new view.courseManager().view();
+            }
+        });
+
+        noticeManageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NoticeManager().view();
+            }
+        });
     }
 }
