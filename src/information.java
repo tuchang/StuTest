@@ -30,6 +30,8 @@ public class information {
     static DefaultTableModel dtm = new DefaultTableModel(cellData,tableColumnName);
     static JTable jt = new JTable(dtm);
 
+    //jt.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER,0),"moveForward");
+
 
 
     static String driver = "com.mysql.jdbc.Driver";
