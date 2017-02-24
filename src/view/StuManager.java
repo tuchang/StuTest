@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 /**
  * Created by tuchang on 22/02/2017.
@@ -25,22 +26,22 @@ public class StuManager {
     JLabel subheading = new JLabel();
     JButton confirm = new JButton("确认");
 
+    String[] titles = {"姓名", "学号", "性别", "手机", "邮箱",
+            "学院", "专业", "班级", "身份证", "培养方向", "学制", "入学年份", "备注"};
 
-    DefaultTableModel stuTableModel = new DefaultTableModel();
+    DefaultTableModel stuTableModel = new DefaultTableModel(new Object[1][13], titles);
     JTable stuTable = new JTable(stuTableModel);
 
     //JTable changeStuTable = new JTable();
 
-    public JComboBox getQueryItem() {
-        return queryItem;
-    }
+//    public JComboBox getQueryItem() {
+//        return queryItem;
+//    }
+//    public JTextField getQueryField() {
+//        return queryField;
+//    }
 
-    public JTextField getQueryField() {
-        return queryField;
-    }
 
-    String[] titles = {"姓名", "学号", "性别", "手机", "邮箱",
-            "学院", "专业", "班级", "身份证", "培养方向", "学制", "入学年份", "备注"};
     JComboBox queryItem = new JComboBox(titles);
     JTextField queryField = new JTextField("请输入查询文本");
 
@@ -49,7 +50,8 @@ public class StuManager {
 
     public void view()
     {
-        jp.setLayout(new FlowLayout());
+        //jp.setLayout(new FlowLayout());
+        jp.setLayout(new BorderLayout());
 
         stuManagerWindow.setLayout(new FlowLayout());
         stuManagerWindow.add(createStuButton);
@@ -57,12 +59,17 @@ public class StuManager {
         stuManagerWindow.add(queryStuButton);
         stuManagerWindow.add(Box.createHorizontalStrut(1000));
         stuManagerWindow.add(subheading);
+        stuManagerWindow.add(jp);
 
+        jp.add(stuTable.getTableHeader(),BorderLayout.NORTH);
+        jp.add(stuTable);
+        jp.add(confirm,BorderLayout.SOUTH);
 
 
 
         stuManagerWindow.setVisible(true);
-        stuManagerWindow.setSize(400,100);
+        stuManagerWindow.setSize(1000,600);
+        //jp.setSize(400,600);
 
 
         createStuButton.addActionListener(new ActionListener() {
@@ -71,15 +78,65 @@ public class StuManager {
                 flag = 0;
                 subheading.setText("新建学生信息");
 
+
+                stuManagerWindow.remove(queryItem);
+                stuManagerWindow.remove(queryField);
+
+                //jp.removeAll();
+//                jp.add(stuTable.getTableHeader(),BorderLayout.NORTH);
+//                jp.add(stuTable);
+//                jp.add(confirm,BorderLayout.SOUTH);
+
+
+
+
+                //System.out.println("hehe");
+
+                //stuManagerWindow.getContentPane().removeAll();
+//                stuManagerWindow.add(createStuButton);
+//                stuManagerWindow.add(changeStuButton);
+//                stuManagerWindow.add(queryStuButton);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(subheading);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//
+//                stuManagerWindow.add(stuTable.getTableHeader());
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(stuTable);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(confirm);
+
             }
         });
         changeStuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 flag = 1;
-                subheading.setText("修改学生信息");
-                jp.removeAll();
-                jp.add(stuTable);
+                subheading.setText("修改学生信息(以学号为准，不可修改学号)");
+
+                stuManagerWindow.remove(queryItem);
+                stuManagerWindow.remove(queryField);
+
+//                jp.removeAll();
+//                jp.add(stuTable.getTableHeader(),BorderLayout.NORTH);
+//                //jp.add(Box.createHorizontalStrut(2000));
+//                jp.add(stuTable);
+//                //jp.add(Box.createHorizontalStrut(1000));
+//                jp.add(confirm,BorderLayout.SOUTH);
+
+//                stuManagerWindow.removeAll();
+//                stuManagerWindow.add(createStuButton);
+//                stuManagerWindow.add(changeStuButton);
+//                stuManagerWindow.add(queryStuButton);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(subheading);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//
+//                stuManagerWindow.add(stuTable.getTableHeader());
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(stuTable);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(confirm);
             }
         });
 
@@ -88,19 +145,60 @@ public class StuManager {
             public void actionPerformed(ActionEvent e) {
                 flag = 2;
                 subheading.setText("查询学生信息");
-                jp.removeAll();
-                jp.add(queryItem);
-                jp.add(queryField);
-                jp.add(stuTable);
+                //jp.removeAll();
+
+                stuManagerWindow.remove(jp);
+                stuManagerWindow.add(queryItem);
+                stuManagerWindow.add(queryField);
+                stuManagerWindow.add(jp);
+                //jp.add(Box.createHorizontalStrut(1000));
+                //jp.add(stuTable.getTableHeader());
+                //jp.add(Box.createHorizontalStrut(2000));
+                //jp.add(stuTable);
+                //jp.add(Box.createHorizontalStrut(2000));
+                //jp.add(confirm);
+
+//                stuManagerWindow.removeAll();
+//                stuManagerWindow.add(createStuButton);
+//                stuManagerWindow.add(changeStuButton);
+//                stuManagerWindow.add(queryStuButton);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(subheading);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//
+//                stuManagerWindow.add(queryItem);
+//                stuManagerWindow.add(queryField);
+//
+//                stuManagerWindow.add(stuTable.getTableHeader());
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(stuTable);
+//                stuManagerWindow.add(Box.createHorizontalStrut(1000));
+//                stuManagerWindow.add(confirm);
             }
         });
 
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 stuTableModel.setDataVector(
-                        new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText())
-                        ,titles);
+                        new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText()
+                                ,stuTableModel.getDataVector())
+                                ,titles);
+
+//                switch(flag)
+//                {
+//                    case 0:弹框新建学生信息成功
+//                           新建失败
+//                          break;
+//                    case 1:修改学生信息成功
+//                            修改学生信息失败
+//                          break;
+//                    case 2:输出信息
+//                            stuManagerWindow.remove(queryItem);
+//                            stuManagerWindow.remove(queryField);
+//                          break;
+//                }
 
             }
         });
@@ -112,6 +210,6 @@ public class StuManager {
 
 /*
 * 删除学生信息 修改成1或者0 新建的时候改成新的
-*
+* 怎么把view数据传递到control
 *
 * */
