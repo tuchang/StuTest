@@ -53,7 +53,7 @@ public class SignInListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         LoginData lg = new LoginDatabase().getLoginData(Login.username.getText());
-        view.Login.loginWindow.setVisible(false);
+        //view.Login.loginWindow.setVisible(false);
 
 
         //System.out.println(type.getSelectedIndex());
@@ -62,10 +62,13 @@ public class SignInListener implements ActionListener
             switch (Login.type.getSelectedIndex())
             {
                 case 0:new Admin().adminView();
+                    view.Login.loginWindow.setVisible(false);
                     break;
                 case 1: ;
+                    view.Login.loginWindow.setVisible(false);
                     break;
                 case 2:
+                    view.Login.loginWindow.setVisible(false);
                     break;
                 //default:System.out.println(type.getItemCount());
             }

@@ -17,4 +17,7 @@ CREATE TABLE `student_information` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
+
 set names = utf8;
+set sql_safe_updates=0;

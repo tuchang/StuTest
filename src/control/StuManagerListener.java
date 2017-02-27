@@ -30,7 +30,7 @@ public class StuManagerListener {
                 default:
             }
 
-
+            //System.out.println(members);
 
 
 

@@ -7,6 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 /**
@@ -181,29 +183,44 @@ public class StuManager {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                stuTableModel.setDataVector(
-                        new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText()
-                                ,stuTableModel.getDataVector())
-                                ,titles);
 
-//                switch(flag)
-//                {
+
+//                System.out.println(new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText()
+//                        ,stuTableModel.getDataVector()));
+
+                switch(flag)
+                {
 //                    case 0:弹框新建学生信息成功
 //                           新建失败
 //                          break;
 //                    case 1:修改学生信息成功
 //                            修改学生信息失败
 //                          break;
-//                    case 2:输出信息
+                    case 2: stuTableModel.setDataVector(
+                            new StuManagerListener().control(
+                                    flag,queryItem.getSelectedIndex(),queryField.getText()
+                                    ,stuTableModel.getDataVector()
+                            ),titles);
+                        //输出信息
+
 //                            stuManagerWindow.remove(queryItem);
 //                            stuManagerWindow.remove(queryField);
+
 //                          break;
-//                }
+                }
 
             }
         });
 
 
+        stuManagerWindow.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //System.out.println("hehe");
+                Admin.adminWindow.setVisible(true);
+                stuManagerWindow.dispose();
+            }
+        });
 
     }
 }

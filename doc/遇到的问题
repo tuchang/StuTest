@@ -1,0 +1,15 @@
+rs.getString 从1开始
+
+A successful MySQL connection was made with the parameters defined for this connection.
+
+JDBC mysql 中文查询不到数据解决
+String url = "jdbc:mysql://127.0.0.1:3306/mydata?useUnicode=true&characterEncoding=utf-8";
+
+身份表示用数字好还是字符好 使用了数字表示 0管理员 1教师 2学生
+
+
+static定义JFrame窗口的removeAll和dispose
+set = null; null在dispose()后,不然关不掉显示的窗口
+
+elementAt()与get()效果一致
+尽管elemengtAt（）方法未过时，但首选使用方法是 get(int)
