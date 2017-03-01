@@ -24,4 +24,7 @@ java 判断条件顺序 从右到左还是从左到右
 http://blog.csdn.net/jiangnan2014/article/details/22857159
 
 at java.io.FileInputStream.open0(Native Method)
-可能的原因：原来在Windows中很多路径分隔符写成\\了，看来以后写Java的时候还是要严谨，统一用/
+tips 原来在Windows中很多路径分隔符写成\\了，看来以后写Java的时候还是要严谨，统一用/
+目录写错 如果目录不存在要先创建目录
+不能有前面的file:
+url + getAbsolutePath

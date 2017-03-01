@@ -176,7 +176,7 @@ public class NoticeDatabase {
         sql="select max(id) from notice_table;";
         try {
             rs = st.executeQuery(sql);
-            System.out.println(rs.next());
+            //System.out.println(rs.next());
             if (rs.next()||rs.getString(1) != null)
             {
                 return Integer.parseInt(rs.getString(1));
