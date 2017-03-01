@@ -64,7 +64,7 @@ public class SignInListener implements ActionListener
                 case 0:new Admin().adminView();
                     view.Login.loginWindow.setVisible(false);
                     break;
-                case 1: ;
+                case 1:
                     view.Login.loginWindow.setVisible(false);
                     break;
                 case 2:
@@ -73,5 +73,11 @@ public class SignInListener implements ActionListener
                 //default:System.out.println(type.getItemCount());
             }
         }
+//        else
+//        {
+//            System.out.println("登录失败");
+//            System.out.println(password.getText());
+//            System.out.println(lg.getPwd());
+//        }
     }
 }

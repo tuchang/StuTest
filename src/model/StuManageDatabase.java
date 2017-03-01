@@ -51,28 +51,30 @@ public class StuManageDatabase {
     public String[][] createStu(Vector inputTables)
     {
         init();
-
-        //try {
+//        System.out.println("hehe.");
+        try {
             for(int i=0;i<inputTables.size();i++)
-            sql = "insert into student_information values("
-                    + ((Vector) inputTables.get(i)).get(0) +','
-                    + ((Vector) inputTables.get(i)).get(1) +','
-                    + ((Vector) inputTables.get(i)).get(2) +','
-                    + ((Vector) inputTables.get(i)).get(3) +','
-                    + ((Vector) inputTables.get(i)).get(4) +','
-                    + ((Vector) inputTables.get(i)).get(5) +','
-                    + ((Vector) inputTables.get(i)).get(6) +','
-                    + ((Vector) inputTables.get(i)).get(7) +','
-                    + ((Vector) inputTables.get(i)).get(8) +','
-                    + ((Vector) inputTables.get(i)).get(9) +','
-                    + ((Vector) inputTables.get(i)).get(10) +','
-                    + ((Vector) inputTables.get(i)).get(11) +','
-                    + ((Vector) inputTables.get(i)).get(11)+");";
+            sql = "insert into student_information values('"
+                    + ((Vector) inputTables.get(i)).get(0) +"',"
+                    + ((Vector) inputTables.get(i)).get(1) +",'"
+                    + ((Vector) inputTables.get(i)).get(2) +"',"
+                    + ((Vector) inputTables.get(i)).get(3) +",'"
+                    + ((Vector) inputTables.get(i)).get(4) +"','"
+                    + ((Vector) inputTables.get(i)).get(5) +"','"
+                    + ((Vector) inputTables.get(i)).get(6) +"','"
+                    + ((Vector) inputTables.get(i)).get(7) +"','"
+                    + ((Vector) inputTables.get(i)).get(8) +"','"
+                    + ((Vector) inputTables.get(i)).get(9) +"',"
+                    + ((Vector) inputTables.get(i)).get(10) +","
+                    + ((Vector) inputTables.get(i)).get(11) +",'"
+                    + ((Vector) inputTables.get(i)).get(12) +"');";
 
-            //st.execute(sql);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+            System.out.println(sql);
+
+            st.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         close();
@@ -86,23 +88,27 @@ public class StuManageDatabase {
 
         for (int i=0;i<inputTables.size();i++)
         {
-            sql = "update student_information set stu_name="
-                    + ((Vector) inputTables.get(i)).get(0) +",set sex="
-                    + ((Vector) inputTables.get(i)).get(2) +",set phone="
-                    + ((Vector) inputTables.get(i)).get(3) +",set email="
-                    + ((Vector) inputTables.get(i)).get(4) +",set school="
-                    + ((Vector) inputTables.get(i)).get(5) +",set major="
-                    + ((Vector) inputTables.get(i)).get(6) +",set class="
-                    + ((Vector) inputTables.get(i)).get(7) +",set identity="
-                    + ((Vector) inputTables.get(i)).get(8) +",set direction="
-                    + ((Vector) inputTables.get(i)).get(9) +",set year="
+            sql = "update student_information set stu_name='"
+                    + ((Vector) inputTables.get(i)).get(0) +"',set sex='"
+                    + ((Vector) inputTables.get(i)).get(2) +"',set phone="
+                    + ((Vector) inputTables.get(i)).get(3) +",set email='"
+                    + ((Vector) inputTables.get(i)).get(4) +"',set school='"
+                    + ((Vector) inputTables.get(i)).get(5) +"',set major='"
+                    + ((Vector) inputTables.get(i)).get(6) +"',set class='"
+                    + ((Vector) inputTables.get(i)).get(7) +"',set identity='"
+                    + ((Vector) inputTables.get(i)).get(8) +"',set direction='"
+                    + ((Vector) inputTables.get(i)).get(9) +"',set year="
                     + ((Vector) inputTables.get(i)).get(10) +",set admission="
-                    + ((Vector) inputTables.get(i)).get(11) +",set notes="
-                    + ((Vector) inputTables.get(i)).get(12)+");";
+                    + ((Vector) inputTables.get(i)).get(11) +",set notes='"
+                    + ((Vector) inputTables.get(i)).get(12)+"' where stu_id="+((Vector) inputTables.get(i)).get(1)+";";
         }
 
         System.out.println(sql);
-        //st.execute(sql);
+        try {
+            st.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         close();
         return new String[0][];

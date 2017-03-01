@@ -1,7 +1,29 @@
+set names = utf8;
+set sql_safe_updates=0;
+
+CREATE TABLE `grade` (
+  `grade_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) DEFAULT NULL,
+  `grade_value` int(11) DEFAULT NULL,
+  `stu_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`grade_id`),
+  UNIQUE KEY `course_id` (`course_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `notice_table` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `abstract` varchar(45) DEFAULT NULL,
+  `modify_time` varchar(45) NOT NULL,
+  `create_time` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `student_information` (
   `stu_Name` varchar(20) DEFAULT NULL,
-  `sex` varchar(5) NOT NULL,
   `stu_id` bigint(20) NOT NULL,
+  `sex` varchar(5) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(20) DEFAULT NULL,
   `school` varchar(20) DEFAULT NULL,
@@ -9,15 +31,32 @@ CREATE TABLE `student_information` (
   `class` varchar(20) DEFAULT NULL,
   `identity` varchar(20) DEFAULT NULL,
   `direction` varchar(20) DEFAULT NULL,
-  `notes` mediumtext,
   `year` int(11) DEFAULT NULL,
   `admission` int(11) DEFAULT NULL,
+  `notes` text,
   UNIQUE KEY `stu_id` (`stu_id`),
   UNIQUE KEY `identity` (`identity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `user_table` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(20) DEFAULT NULL,
+  `user_pwd` varchar(20) DEFAULT NULL,
+  `user_type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_name` (`user_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-
-
-set names = utf8;
-set sql_safe_updates=0;
+CREATE TABLE `course` (
+  `course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(20) DEFAULT NULL,
+  `faculty_id` int(11) NOT NULL,
+  `faculty_name` varchar(20) DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `place` varchar(20) DEFAULT NULL,
+  `session` varchar(20) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`course_id`),
+  UNIQUE KEY `faculty_id` (`faculty_id`),
+  UNIQUE KEY `course_name` (`course_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

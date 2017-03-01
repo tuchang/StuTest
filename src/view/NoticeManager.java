@@ -7,6 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
  /**
  * Created by tuchang on 22/02/2017.
@@ -14,18 +16,19 @@ import java.awt.event.ActionListener;
 public class NoticeManager {
     JFrame noticeManagerWindow = new JFrame("公告管理");
     JButton createNoticeButton = new JButton("新建公告");
-    JButton changeNoticeButton = new JButton("修改用户");
+    JButton changeNoticeButton = new JButton("修改公告");
     JButton watchNoticeButton = new JButton("查看公告");
 
     JLabel subtitle = new JLabel();
 
 
      JPanel jp = new JPanel(new BorderLayout());
-     String[] titles = {"公告编号","公告摘要","修改时间","公告创建时间"};
-     DefaultTableModel noticeTableModel = new DefaultTableModel(new Object[1][4],titles);
-     JTable noticeTable = new JTable();
+     JPanel jp2 = new JPanel(new BorderLayout());
+     String[] titles = {"公告编号","标题","摘要","修改时间","创建时间"};
+     DefaultTableModel noticeTableModel = new DefaultTableModel(new Object[1][5],titles);
+     JTable noticeTable = new JTable(noticeTableModel);
      JTextField title = new JTextField("请输入标题");
-     JTextArea content = new JTextArea("请输入公告内容。");
+     JTextArea content = new JTextArea("请输入公告内容。",30,40);
      JButton confirm = new JButton("确认");
      int flag = -1;
 
@@ -44,22 +47,45 @@ public class NoticeManager {
         noticeManagerWindow.add(changeNoticeButton);
         noticeManagerWindow.add(watchNoticeButton);
         noticeManagerWindow.add(Box.createHorizontalStrut(1000));
-        noticeManagerWindow.add(noticeTable);
+        noticeManagerWindow.add(subtitle);
+        noticeManagerWindow.add(Box.createHorizontalStrut(1000));
+
+        //noticeManagerWindow.add(noticeTable);
         noticeManagerWindow.setVisible(true);
         noticeManagerWindow.setSize(800,1000);
+
+        content.setLineWrap(true);
+
 
         jp.add(noticeTable.getTableHeader(),BorderLayout.NORTH);
         jp.add(noticeTable);
         jp.add(confirm,BorderLayout.SOUTH);
+
+        jp2.add(title,BorderLayout.NORTH);
+        jp2.add(content);
+        jp2.add(confirm,BorderLayout.SOUTH);
+
 
         createNoticeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 flag = 0;
                 subtitle.setText("创建公告");
-                noticeManagerWindow.add(title);
-                noticeManagerWindow.add(content);
-                noticeManagerWindow.add(confirm);
+                //noticeManagerWindow.add(Box.createHorizontalStrut(1000));
+//                noticeManagerWindow.add(title);
+//                noticeManagerWindow.add(Box.createHorizontalStrut(1000));
+//                noticeManagerWindow.add(content);
+//                content.setMinimumSize(new Dimension(600,600));
+//                noticeManagerWindow.add(Box.createHorizontalStrut(1000));
+//                noticeManagerWindow.add(confirm);
+//                //System.out.println("getup");
+                noticeManagerWindow.remove(jp);
+                noticeManagerWindow.add(jp2);
+                jp2.add(confirm,BorderLayout.SOUTH);
+                noticeManagerWindow.repaint();
+                noticeManagerWindow.validate();
+
+
             }
         });
 
@@ -68,10 +94,17 @@ public class NoticeManager {
             public void actionPerformed(ActionEvent e) {
                 flag = 1;
                 subtitle.setText("修改公告");
-                noticeManagerWindow.remove(title);
-                noticeManagerWindow.remove(content);
-                noticeManagerWindow.remove(confirm);
+//                noticeManagerWindow.remove(title);
+//                noticeManagerWindow.remove(content);
+//                noticeManagerWindow.remove(confirm);
+                noticeManagerWindow.remove(jp2);
                 noticeManagerWindow.add(jp);
+                jp.add(confirm,BorderLayout.SOUTH);
+                noticeTableModel.setDataVector(new NoticeControl().showNotice(),titles);
+
+                noticeManagerWindow.repaint();
+                noticeManagerWindow.validate();
+
             }
         });
 
@@ -81,10 +114,18 @@ public class NoticeManager {
             public void actionPerformed(ActionEvent e) {
                 flag = 2;
                 subtitle.setText("查看公告");
-                noticeManagerWindow.remove(title);
-                noticeManagerWindow.remove(content);
-                noticeManagerWindow.remove(confirm);
+//                noticeManagerWindow.remove(title);
+//                noticeManagerWindow.remove(content);
+//                noticeManagerWindow.remove(confirm);
+                noticeManagerWindow.remove(jp2);
                 noticeManagerWindow.add(jp);
+                jp.add(confirm,BorderLayout.SOUTH);
+                noticeTableModel.setDataVector(new NoticeControl().showNotice(),titles);
+
+
+                noticeManagerWindow.repaint();
+                noticeManagerWindow.validate();
+
             }
         });
 
@@ -92,19 +133,64 @@ public class NoticeManager {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("flag."+flag);
                 switch(flag)
                 {
+                    //create
                     case 0:new NoticeControl().createNotice(title.getText(),content.getText());
                         break;
+                    //change
                     case 1:
+                        flag = 3;
+                        noticeManagerWindow.remove(jp);
+                        noticeManagerWindow.add(jp2);
+                        jp2.add(confirm,BorderLayout.SOUTH);
+                        title.setText((String) noticeTableModel.getValueAt(noticeTable.getSelectedRow(),1));
+                        content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0)))));
+                        System.out.println(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0));
+
+
+                        noticeManagerWindow.repaint();
+                        noticeManagerWindow.validate();
+
                         break;
+                    //watch
                     case 2:
+                        //flag = 4;
+                        noticeManagerWindow.remove(jp);
+                        noticeManagerWindow.add(jp2);
+                        jp2.add(confirm,BorderLayout.SOUTH);
+                        title.setText((String) noticeTableModel.getValueAt(noticeTable.getSelectedRow(),1));
+                        content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0)))));
+                        System.out.println(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0));
+                        noticeManagerWindow.repaint();
+                        noticeManagerWindow.validate();
+                        break;
+
+                    case 3:
+                        //new NoticeControl().changeNotice((int)noticeTableModel.getDataVector().get(0),title.getText(),content.getText());
+                        new NoticeControl().changeNotice(Integer.valueOf(String.valueOf(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0))),title.getText(),content.getText());
+                        noticeManagerWindow.repaint();
+                        noticeManagerWindow.validate();
+                        break;
+                    case 4:
+                        noticeManagerWindow.remove(jp);
+                        noticeManagerWindow.add(jp2);
+                        title.setText((String) noticeTableModel.getValueAt(noticeTable.getSelectedRow(),1));
+                        content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0)))));
+
                         break;
                 }
             }
         });
 
-
+        noticeManagerWindow.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                noticeManagerWindow.dispose();
+                Admin.adminWindow.setVisible(true);
+            }
+        });
 
 
     }

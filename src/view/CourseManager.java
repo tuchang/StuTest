@@ -69,6 +69,7 @@ public class CourseManager {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jl.setText("录入/修改成绩");
+                flag = 2;
                 courseTable.setModel(gradeModel);
 
             }

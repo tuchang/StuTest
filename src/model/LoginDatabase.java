@@ -33,7 +33,7 @@ public class LoginDatabase {
             conn = DriverManager.getConnection(url, user, pwd);
             st = conn.createStatement();
 
-            sql = "select * from user_table where user_name="+username+";";
+            sql = "select * from user_table where user_name='"+username+"';";
 
             System.out.println(sql);
             rs = st.executeQuery(sql);
@@ -41,9 +41,9 @@ public class LoginDatabase {
 
 //            判断是不是只有一条
             while (rs.next()) {
-                lg.setUsr(rs.getString(0));
-                lg.setPwd(rs.getString(1));
-                lg.setTpye(rs.getString(2));
+                lg.setUsr(rs.getString(2));
+                lg.setPwd(rs.getString(3));
+                lg.setTpye(rs.getString(4));
             }
 
             rs.close();

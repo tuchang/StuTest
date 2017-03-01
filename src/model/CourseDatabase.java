@@ -52,14 +52,20 @@ public class CourseDatabase {
 
         for (int i=0;i<inputVector.size();i++)
             sql = "insert into course values("
-                    +((Vector)inputVector.elementAt(i)).elementAt(0)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(1)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(2)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(3)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(4)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(5)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(6)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(7)+");";
+                    +((Vector)inputVector.elementAt(i)).elementAt(0)+",'"
+                    +((Vector)inputVector.elementAt(i)).elementAt(1)+"',"
+                    +((Vector)inputVector.elementAt(i)).elementAt(2)+",'"
+                    +((Vector)inputVector.elementAt(i)).elementAt(3)+"','"
+                    +((Vector)inputVector.elementAt(i)).elementAt(4)+"','"
+                    +((Vector)inputVector.elementAt(i)).elementAt(5)+"',"
+                    +((Vector)inputVector.elementAt(i)).elementAt(6)+",'"
+                    +((Vector)inputVector.elementAt(i)).elementAt(7)+"');";
+        System.out.println(sql);
+        try {
+            st.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         close();
     }
 
@@ -69,20 +75,20 @@ public class CourseDatabase {
         for (int i = 0; i < inputVector.size(); i++)
         {
             sql = "update course set "
-                    + ",grade_name=" + ((Vector) inputVector.elementAt(i)).elementAt(1)
-                    + ",faculty_id=" + ((Vector) inputVector.elementAt(i)).elementAt(2)
-                    + ",faculty_name=" + ((Vector) inputVector.elementAt(i)).elementAt(3)
-                    + ",time=" + ((Vector) inputVector.elementAt(i)).elementAt(4)
-                    + ",place=" + ((Vector) inputVector.elementAt(i)).elementAt(5)
-                    + ",session=" + ((Vector) inputVector.elementAt(i)).elementAt(6)
-                    + ",description=" + ((Vector) inputVector.elementAt(i)).elementAt(7)
-                    + " where grade_id=" + ((Vector) inputVector.elementAt(i)).elementAt(0) + ";";
+                    + "course_name='" + ((Vector) inputVector.elementAt(i)).elementAt(1)
+                    + "',faculty_id=" + ((Vector) inputVector.elementAt(i)).elementAt(2)
+                    + ",faculty_name='" + ((Vector) inputVector.elementAt(i)).elementAt(3)
+                    + "',time='" + ((Vector) inputVector.elementAt(i)).elementAt(4)
+                    + "',place='" + ((Vector) inputVector.elementAt(i)).elementAt(5)
+                    + "',session=" + ((Vector) inputVector.elementAt(i)).elementAt(6)
+                    + ",description='" + ((Vector) inputVector.elementAt(i)).elementAt(7)
+                    + "' where course_id=" + ((Vector) inputVector.elementAt(i)).elementAt(0) + ";";
             System.out.println(sql);
-//            try {
-//                st.execute(sql);
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                st.execute(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
 

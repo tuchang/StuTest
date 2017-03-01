@@ -13,3 +13,15 @@ set = null; null在dispose()后,不然关不掉显示的窗口
 
 elementAt()与get()效果一致
 尽管elemengtAt（）方法未过时，但首选使用方法是 get(int)
+
+elementAt从0开始 rs.getString从1开始
+
+公告使用txt还是doc好 JTextArea好像能直接使用doc
+
+什么时候用repaint()什么时候用noticeManagerWindow.validate();
+
+java 判断条件顺序 从右到左还是从左到右
+http://blog.csdn.net/jiangnan2014/article/details/22857159
+
+at java.io.FileInputStream.open0(Native Method)
+可能的原因：原来在Windows中很多路径分隔符写成\\了，看来以后写Java的时候还是要严谨，统一用/

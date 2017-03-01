@@ -51,11 +51,22 @@ public class GradeDatabase {
         init();
 
         for (int i=0;i<inputVector.size();i++)
-        sql = "insert into grade values("
-                +((Vector)inputVector.elementAt(i)).elementAt(0)+","
-                +((Vector)inputVector.elementAt(i)).elementAt(1)+","
-                +((Vector)inputVector.elementAt(i)).elementAt(2)+","
-                +((Vector)inputVector.elementAt(i)).elementAt(3)+");";
+        {
+            //当已存在时插入变修改
+            sql = "insert into grade values("
+                    +((Vector)inputVector.elementAt(i)).elementAt(0)+","
+                    +((Vector)inputVector.elementAt(i)).elementAt(1)+","
+                    +((Vector)inputVector.elementAt(i)).elementAt(2)+","
+                    +((Vector)inputVector.elementAt(i)).elementAt(3)+");";
+            System.out.println(sql);
+            try {
+                st.execute(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         close();
     }
 }

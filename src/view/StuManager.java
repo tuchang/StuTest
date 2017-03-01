@@ -183,30 +183,40 @@ public class StuManager {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-
-
+                System.out.println("flag."+flag);
 //                System.out.println(new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText()
 //                        ,stuTableModel.getDataVector()));
 
                 switch(flag)
                 {
-//                    case 0:弹框新建学生信息成功
-//                           新建失败
-//                          break;
-//                    case 1:修改学生信息成功
-//                            修改学生信息失败
-//                          break;
+                    //弹框新建学生信息 成功/新建失败
+                    case 0:
+//                        System.out.println("hehe.0");
+                        new StuManagerListener().control(
+                                flag,-1,null
+                                ,stuTableModel.getDataVector());
+//                        System.out.println("hehe.1");
+                          break;
+                    //修改学生信息成功/修改学生信息失败
+                    case 1:
+                        new StuManagerListener().control(
+                                flag,-1,null
+                                ,stuTableModel.getDataVector());
+                          break;
                     case 2: stuTableModel.setDataVector(
                             new StuManagerListener().control(
                                     flag,queryItem.getSelectedIndex(),queryField.getText()
-                                    ,stuTableModel.getDataVector()
-                            ),titles);
+                                    ,stuTableModel.getDataVector())
+                            ,titles);
                         //输出信息
 
 //                            stuManagerWindow.remove(queryItem);
 //                            stuManagerWindow.remove(queryField);
 
-//                          break;
+                          break;
+                    case -1:subheading.setText("未选择管理操作");
+                        break;
+
                 }
 
             }

@@ -21,7 +21,11 @@ public class StuManagerListener {
 
             switch (flag)
             {
-                case 0:members = new model.StuManageDatabase().createStu(inputTables);
+
+                case 0:
+//                    System.out.println("hehe.1");
+                    members = new model.StuManageDatabase().createStu(inputTables);
+//                    System.out.println("hehe.");
                     break;
                 case 1:members = new model.StuManageDatabase().changeStu(inputTables);
                     break;
