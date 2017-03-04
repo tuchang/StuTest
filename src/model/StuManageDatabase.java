@@ -89,7 +89,7 @@ public class StuManageDatabase {
         for (int i=0;i<inputTables.size();i++)
         {
             sql = "update student_information set stu_name='"
-                    + ((Vector) inputTables.get(i)).get(0) +"',set sex='"
+                    + ((Vector) inputTables.get(i)).get(0) +"', sex='"
                     + ((Vector) inputTables.get(i)).get(2) +"',set phone="
                     + ((Vector) inputTables.get(i)).get(3) +",set email='"
                     + ((Vector) inputTables.get(i)).get(4) +"',set school='"

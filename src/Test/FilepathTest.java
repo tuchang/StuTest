@@ -1,4 +1,4 @@
-package control;
+package Test;
 
 /**
  * Created by tuchang on 28/02/2017.

@@ -7,6 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by tuchang on 23/02/2017.
@@ -16,6 +18,11 @@ public class Faculty {
     JButton queryStuButton = new JButton("查询学生信息");
     JButton course = new JButton("查询课程/导出名册");
     JButton watchNotice = new JButton("查看公告");
+
+
+    String[] courseTitles = {"课程编号","课程名称","教师编号","教师名称","上课时间","上课地点","学期代号","课程描述"};
+    String[] noticeTitles = {"公告编号","标题","摘要","修改时间","创建时间"};
+
     DefaultTableModel facultyTableModel = new DefaultTableModel();
     JTable facultyWindowTable = new JTable(facultyTableModel);
     JPanel jp = new JPanel();
@@ -23,9 +30,10 @@ public class Faculty {
     JButton confirm = new JButton("确认");
 
 
-    String[] titles = {"姓名", "学号", "性别", "手机", "邮箱",
+
+    String[] stuTitles = {"姓名", "学号", "性别", "手机", "邮箱",
             "学院", "专业", "班级", "身份证", "培养方向", "学制", "入学年份", "备注"};
-    JComboBox queryItem = new JComboBox(titles);
+    JComboBox queryItem = new JComboBox(stuTitles);
     JTextField queryField = new JTextField("请输入查询文本");
 
     JButton export = new JButton("导出名册");
@@ -33,7 +41,7 @@ public class Faculty {
 
     int flag = -1;
 
-    void view()
+    public void view(int id)
     {
         facultyWindow.setLayout(new FlowLayout());
         facultyWindow.add(queryStuButton);
@@ -42,13 +50,16 @@ public class Faculty {
         //jp.setLayout(new FlowLayout());
         jp.setLayout(new BorderLayout());
         facultyWindow.setVisible(true);
-        facultyWindow.setSize(600,800);
+        facultyWindow.setSize(1000,800);
         facultyWindow.add(Box.createHorizontalStrut(1000));
         //facultyWindow.add(jp);
+        facultyWindow.add(subheading);
+        facultyWindow.add(Box.createHorizontalStrut(1000));
+
 
         jp.add(facultyWindowTable.getTableHeader(),BorderLayout.NORTH);
         jp.add(facultyWindowTable);
-        facultyWindow.add(confirm,BorderLayout.SOUTH);
+        jp.add(confirm,BorderLayout.SOUTH);
 
 
 
@@ -59,6 +70,7 @@ public class Faculty {
             public void actionPerformed(ActionEvent e) {
                 flag = 0;
                 subheading.setText("查询学生信息");
+                facultyTableModel.setDataVector(new Object[1][13],stuTitles);
 
 
 
@@ -69,6 +81,8 @@ public class Faculty {
                 facultyWindow.add(jp);
 
 
+                facultyWindow.repaint();
+                facultyWindow.validate();
 
 
 
@@ -79,11 +93,16 @@ public class Faculty {
         course.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                facultyTableModel.setDataVector(new Object[1][8],courseTitles);
                 flag = 1;
                 subheading.setText("查询课程/导出名册");
                 facultyWindow.remove(queryItem);
                 facultyWindow.remove(queryField);
                 jp.add(export,BorderLayout.EAST);
+
+                facultyWindow.repaint();
+                facultyWindow.validate();
             }
         });
 
@@ -91,11 +110,15 @@ public class Faculty {
         watchNotice.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                facultyTableModel.setDataVector(new Object[1][5],noticeTitles);
                 flag = 2;
                 subheading.setText("查看公告");
                 facultyWindow.remove(queryItem);
                 facultyWindow.remove(queryField);
                 jp.remove(export);
+
+                facultyWindow.repaint();
+                facultyWindow.validate();
             }
         });
 
@@ -108,7 +131,7 @@ public class Faculty {
                     case 0:facultyTableModel.setDataVector(
                             new FacultyListener().queryStu(
                                     queryItem.getSelectedIndex(),queryField.getText()
-                            ),titles);
+                            ),stuTitles);
                         break;
                     case 1:
                         break;
@@ -117,6 +140,23 @@ public class Faculty {
                 }
             }
         });
+
+
+
+        export.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("敬请期待");
+            }
+        });
+        facultyWindow.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Login.loginWindow.setVisible(true);
+                facultyWindow.dispose();
+            }
+        });
+
 
     }
 }

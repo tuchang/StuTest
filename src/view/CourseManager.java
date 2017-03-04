@@ -85,7 +85,7 @@ public class CourseManager {
                         break;
                     case 1:new CourseListener().changeCourse(courseMedel.getDataVector());
                         break;
-                    case 2:new CourseListener().grade(gradeModel.getDataVector());
+                    case 2:new CourseListener().setGrade(gradeModel.getDataVector());
                         break;
                 }
 

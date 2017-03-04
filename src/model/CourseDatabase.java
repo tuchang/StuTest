@@ -94,4 +94,11 @@ public class CourseDatabase {
 
         close();
     }
+
+    public String[][] queryCourse(int id)
+    {
+        return null;
+    }
+
+
 }

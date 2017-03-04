@@ -69,4 +69,41 @@ public class GradeDatabase {
 
         close();
     }
+
+    public String[][] getGrade(int id)
+    {
+        init();
+        String[][] rss = null;
+        sql = "select * from grade where stu_id = "+id+";";
+
+        System.out.println(sql);
+        try {
+            rs = st.executeQuery(sql);
+            int rowCount=0;
+            rs.last();
+            rowCount = rs.getRow();
+            rs.first();
+            rss = new String[rowCount][3];
+            System.out.println(rowCount);
+
+            for(int i=0;i<rowCount;i++)
+            {
+                rss[i][0] = rs.getString(1);//成绩id
+                rss[i][1] = rs.getString(2);//课程id
+                rss[i][2] = rs.getString(4);//成绩
+                System.out.println(i+"."+rss[i][0]);
+                rs.next();//!!
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        close();
+        return rss;
+    }
 }

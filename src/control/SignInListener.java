@@ -1,9 +1,7 @@
 package control;
 
 import model.LoginDatabase;
-import view.Admin;
-import view.Login;
-import view.StuManager;
+import view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,10 +62,10 @@ public class SignInListener implements ActionListener
                 case 0:new Admin().adminView();
                     view.Login.loginWindow.setVisible(false);
                     break;
-                case 1:
+                case 1:new Faculty().view(1);
                     view.Login.loginWindow.setVisible(false);
                     break;
-                case 2:
+                case 2:new Student().view(1);//temp_id = 1;
                     view.Login.loginWindow.setVisible(false);
                     break;
                 //default:System.out.println(type.getItemCount());
