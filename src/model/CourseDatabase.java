@@ -95,8 +95,26 @@ public class CourseDatabase {
         close();
     }
 
-    public String[][] queryCourse(int id)
+    public String[][] queryCourse(int id,int type)
     {
+        init();
+        String[][] resultCourse =null;
+        if(type==1)//教师
+        {
+            sql = "select * from course where faculty_id="+id+";";
+            try {
+                rs = st.executeQuery(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else if(type==2)//学生
+        {
+
+        }
+
+        close();
         return null;
     }
 

@@ -4,7 +4,6 @@ import model.UserDatabase;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +26,8 @@ public class UserManager {
     JTable userTable = new JTable(userTableModel);
     JLabel subTitle = new JLabel();
 
+    String[] types = {"系统管理员","教务管理员","学院管理员","教师","学生"};
+    JComboBox jcb = new JComboBox(types);
 
     int flag = -1;
 
@@ -34,7 +35,6 @@ public class UserManager {
 
     void view()
     {
-
         userManagerWindow.setLayout(new FlowLayout());
         userManagerWindow.add(createUserButton);
         userManagerWindow.add(changeUserButton);
@@ -60,7 +60,7 @@ public class UserManager {
             public void actionPerformed(ActionEvent e) {
                 subTitle.setText("新建用户");
                 flag = 0;
-
+                userTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jcb));
             }
         });
 
@@ -69,6 +69,7 @@ public class UserManager {
             public void actionPerformed(ActionEvent e) {
                 subTitle.setText("修改用户");
                 flag = 1;
+                userTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jcb));
             }
         });
 

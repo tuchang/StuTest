@@ -40,4 +40,9 @@ public class CourseListener {
 
         return gradeItem;
     }
+
+    public String[][] queryCourse(int id,int type)
+    {
+        return new CourseDatabase().queryCourse(id,type);
+    }
 }

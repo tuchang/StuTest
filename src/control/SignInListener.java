@@ -1,13 +1,14 @@
 package control;
 
 import model.LoginDatabase;
-import view.*;
+import view.Admin;
+import view.Faculty;
+import view.Student;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static view.Login.password;
-import static view.Login.type;
+import static control.LoginControl.*;
 
 /**
  * Created by tuchang on 22/02/2017.
@@ -50,14 +51,14 @@ public class SignInListener implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        LoginData lg = new LoginDatabase().getLoginData(Login.username.getText());
+        LoginData lg = new LoginDatabase().getLoginData(username.getText());
         //view.Login.loginWindow.setVisible(false);
 
 
         //System.out.println(type.getSelectedIndex());
-        //if (lg.getPwd().equals(password.getText()))
+//        if (lg.getPwd().equals(password.getText())&&captchaText.getText().equals(captcha.getCaptchaCode()))
         {
-            switch (Login.type.getSelectedIndex())
+            switch (type.getSelectedIndex())
             {
                 case 0:new Admin().adminView();
                     view.Login.loginWindow.setVisible(false);
@@ -66,6 +67,12 @@ public class SignInListener implements ActionListener
                     view.Login.loginWindow.setVisible(false);
                     break;
                 case 2:new Student().view(1);//temp_id = 1;
+                    view.Login.loginWindow.setVisible(false);
+                    break;
+                case 3:new Admin().adminView();
+                    view.Login.loginWindow.setVisible(false);
+                    break;
+                case 4:new Admin().adminView();
                     view.Login.loginWindow.setVisible(false);
                     break;
                 //default:System.out.println(type.getItemCount());

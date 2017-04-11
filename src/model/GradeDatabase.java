@@ -27,11 +27,13 @@ public class GradeDatabase {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url,user,pwd);
             st = conn.createStatement();
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -48,16 +50,49 @@ public class GradeDatabase {
 
     public void setGrade(Vector inputVector)
     {
+        //!!
+        if(((String)((Vector) inputVector.elementAt(0)).elementAt(1)).isEmpty()
+                ||((String)((Vector) inputVector.elementAt(0)).elementAt(1))==null)
+        {
+            init();
+
+            for (int i = 0; i < inputVector.size(); i++) {
+                //当已存在时插入变修改
+                //成绩id应该不用手动输入
+                sql = "insert into grade (course_id,stu_id,grade_value) values(null,"
+                        + ((Vector) inputVector.elementAt(i)).elementAt(1) + ","
+                        + ((Vector) inputVector.elementAt(i)).elementAt(2) + ","
+                        + ((Vector) inputVector.elementAt(i)).elementAt(3) + ");";
+                System.out.println(sql);
+                try {
+                    st.execute(sql);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        close();
+    }
+
+    public void updateGrade(Vector inputVector)
+    {
         init();
 
         for (int i=0;i<inputVector.size();i++)
         {
             //当已存在时插入变修改
-            sql = "insert into grade values("
-                    +((Vector)inputVector.elementAt(i)).elementAt(0)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(1)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(2)+","
-                    +((Vector)inputVector.elementAt(i)).elementAt(3)+");";
+//            sql = "update grade set grade_value ="
+//                    +((Vector)inputVector.elementAt(i)).elementAt(3)
+//                    +" where grade_id ="+((Vector)inputVector.elementAt(i)).elementAt(0)
+//                    +"AND course_id ="+((Vector)inputVector.elementAt(i)).elementAt(1)
+//                    +"AND stu_id ="+((Vector)inputVector.elementAt(i)).elementAt(2)
+//                    +";";
+            sql = "update grade set grade_value ="
+                    +((Vector)inputVector.elementAt(i)).elementAt(3)
+                    +" where course_id ="+((Vector)inputVector.elementAt(i)).elementAt(1)
+                    +"AND stu_id ="+((Vector)inputVector.elementAt(i)).elementAt(2)
+                    +";";
             System.out.println(sql);
             try {
                 st.execute(sql);

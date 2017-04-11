@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Vector;
 
 /**
  * Created by tuchang on 22/02/2017.
@@ -28,10 +27,10 @@ public class StuManager {
     JLabel subheading = new JLabel();
     JButton confirm = new JButton("确认");
 
-    String[] titles = {"姓名", "学号", "性别", "手机", "邮箱",
-            "学院", "专业", "班级", "身份证", "培养方向", "学制", "入学年份", "备注"};
+    String[] titles = {"姓名", "学号", "性别", "出生日期", "民族", "层次", "学历类别", "学习形式", "手机", "邮箱",
+            "系", "学院", "专业", "班级", "身份证", "培养方向", "学制", "入学日期", "预计毕业日期", "学籍状态", "备注"};
 
-    DefaultTableModel stuTableModel = new DefaultTableModel(new Object[1][13], titles);
+    DefaultTableModel stuTableModel = new DefaultTableModel(new Object[1][21], titles);
     JTable stuTable = new JTable(stuTableModel);
 
     //JTable changeStuTable = new JTable();
@@ -59,8 +58,9 @@ public class StuManager {
         stuManagerWindow.add(createStuButton);
         stuManagerWindow.add(changeStuButton);
         stuManagerWindow.add(queryStuButton);
-        stuManagerWindow.add(Box.createHorizontalStrut(1000));
+        stuManagerWindow.add(Box.createHorizontalStrut(3000));
         stuManagerWindow.add(subheading);
+        stuManagerWindow.add(Box.createHorizontalStrut(3000));
         stuManagerWindow.add(jp);
 
         jp.add(stuTable.getTableHeader(),BorderLayout.NORTH);
@@ -70,7 +70,7 @@ public class StuManager {
 
 
         stuManagerWindow.setVisible(true);
-        stuManagerWindow.setSize(1000,600);
+        stuManagerWindow.setSize(1800,600);
         //jp.setSize(400,600);
 
 

@@ -20,6 +20,8 @@ public class UserDatabase {
     ResultSet rs = null;
 
 
+    int type ;
+
 
     void init()
     {
@@ -51,12 +53,29 @@ public class UserDatabase {
     public void createUser(Vector inputTable)
     {
         init();
+
+
+
         for(int i=0;i<inputTable.size();i++)
         {
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("系统管理员"))
+                type = 0;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("教务管理员"))
+                type = 3;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学院管理员"))
+                type = 4;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("教师"))
+                type = 1;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学生"))
+                type = 2;
+
+
+
             sql = "insert into user_table values(null,'"
                     +((Vector)inputTable.elementAt(i)).elementAt(0)+"','"
                     +((Vector)inputTable.elementAt(i)).elementAt(1)+"',"
-                    +((Vector)inputTable.elementAt(i)).elementAt(2)+");";
+//                    +((Vector)inputTable.elementAt(i)).elementAt(2)+");";
+                    +type+");";
             System.out.println(sql);
             try {
                 st.execute(sql);
@@ -75,10 +94,22 @@ public class UserDatabase {
 
         for (int i=0;i<inputTable.size();i++)
         {
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("系统管理员"))
+                type = 0;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("教务管理员"))
+                type = 3;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学院管理员"))
+                type = 4;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("教师"))
+                type = 1;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学生"))
+                type = 2;
+
             sql = "update user_table set user_pwd='"
                     +((Vector)inputTable.elementAt(i)).elementAt(1)
                     + "',"
-                    + "user_type="+((Vector)inputTable.elementAt(i)).elementAt(2)
+//                    + "user_type="+((Vector)inputTable.elementAt(i)).elementAt(2)
+                    + "user_type="+type
                     + " where user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
         }
 
