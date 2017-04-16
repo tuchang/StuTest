@@ -27,7 +27,7 @@ public class StuManageDatabase {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url,user,pwd);
             st = conn.createStatement();
-            System.out.println("init.st:"+st);
+//            System.out.println("init.st:"+st);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -135,7 +135,7 @@ public class StuManageDatabase {
     {
         //System.out.println("进入queryStu");
         init();
-        System.out.println("st:"+st);
+//        System.out.println("st:"+st);
 
         String[][] rss = new String[1][21];
         //String[][] rss = null;

@@ -1,5 +1,6 @@
 package view;
 
+import control.CourseListener;
 import control.FacultyListener;
 import control.NoticeControl;
 
@@ -173,7 +174,7 @@ public class Faculty {
                                     queryItem.getSelectedIndex(),queryField.getText()
                             ),stuTitles);
                         break;
-                    case 1:
+                    case 1:facultyTableModel.setDataVector(new CourseListener().queryCourse(id,1),courseTitles);
                         break;
                     case 2:facultyWindow.remove(jp);
                         facultyWindow.add(jp2);
@@ -195,7 +196,15 @@ public class Faculty {
         export.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("敬请期待");
+//                System.out.println("敬请期待");
+                String temp = (String) facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),0);
+                System.out.println(temp);
+                if(!(temp.isEmpty()||temp.equals("")||temp==null||temp.equals("null"))){
+                    new CourseListener().output(Integer.parseInt(temp));
+                }else {
+                    System.out.println("已选择项的第一个字段为空或不符合要求");
+                }
+
             }
         });
         facultyWindow.addWindowListener(new WindowAdapter() {

@@ -20,7 +20,17 @@ public class CourseManager {
     JButton gradeButton = new JButton("成绩录入/修改成绩");//希望增加Excel格式导入
 
     String[] courseTitles = {"课程编号","课程名称","教师编号","教师名称","上课时间","上课地点","学期代号","课程描述"};
-    DefaultTableModel courseMedel = new DefaultTableModel(new Object[1][8], courseTitles);
+    DefaultTableModel courseModel = new DefaultTableModel(new Object[1][8], courseTitles);
+    DefaultTableModel courseModel2 = new DefaultTableModel(new Object[1][8], courseTitles){
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            //第一列不可修改
+            if (columnIndex == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    };
     String[] gradeTitles = {"成绩编号","课程编号","学生ID","成绩"};
     DefaultTableModel gradeModel = new DefaultTableModel(new Object[1][4],gradeTitles);
     JTable courseTable = new JTable();
@@ -46,12 +56,14 @@ public class CourseManager {
         jp.add(courseTable);
         jp.add(confirm,BorderLayout.SOUTH);
 
+        courseModel2.setValueAt("自动",0,0);
 
         createCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jl.setText("创建课程");
-                courseTable.setModel(courseMedel);
+                courseTable.setModel(courseModel2);
+                //id自增 不手动填
                 flag = 0;
             }
         });
@@ -60,7 +72,8 @@ public class CourseManager {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jl.setText("修改课程");
-                courseTable.setModel(courseMedel);
+                courseTable.setModel(courseModel);
+                //需要课程id
                 flag = 1;
             }
         });
@@ -81,9 +94,9 @@ public class CourseManager {
 
                 switch (flag)
                 {
-                    case 0:new CourseListener().createCourse(courseMedel.getDataVector());
+                    case 0:new CourseListener().createCourse(courseModel2.getDataVector());
                         break;
-                    case 1:new CourseListener().changeCourse(courseMedel.getDataVector());
+                    case 1:new CourseListener().changeCourse(courseModel.getDataVector());
                         break;
                     case 2:new CourseListener().setGrade(gradeModel.getDataVector());
                         break;

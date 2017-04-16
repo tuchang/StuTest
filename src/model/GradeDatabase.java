@@ -52,7 +52,7 @@ public class GradeDatabase {
     {
         //!!
         if(((String)((Vector) inputVector.elementAt(0)).elementAt(1)).isEmpty()
-                ||((String)((Vector) inputVector.elementAt(0)).elementAt(1))==null)
+                ||((String)((Vector) inputVector.elementAt(0)).elementAt(1))==null||((String)((Vector) inputVector.elementAt(0)).elementAt(1)).equals("null"))
         {
             init();
 
@@ -69,10 +69,15 @@ public class GradeDatabase {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                finally {
+                    close();
+                }
             }
-        }
 
-        close();
+        }
+        else updateGrade(inputVector);
+
+
     }
 
     public void updateGrade(Vector inputVector)
@@ -91,7 +96,7 @@ public class GradeDatabase {
             sql = "update grade set grade_value ="
                     +((Vector)inputVector.elementAt(i)).elementAt(3)
                     +" where course_id ="+((Vector)inputVector.elementAt(i)).elementAt(1)
-                    +"AND stu_id ="+((Vector)inputVector.elementAt(i)).elementAt(2)
+                    +" AND stu_id ="+((Vector)inputVector.elementAt(i)).elementAt(2)
                     +";";
             System.out.println(sql);
             try {
@@ -119,14 +124,14 @@ public class GradeDatabase {
             rowCount = rs.getRow();
             rs.first();
             rss = new String[rowCount][3];
-            System.out.println(rowCount);
+//            System.out.println("行数:"rowCount);
 
             for(int i=0;i<rowCount;i++)
             {
                 rss[i][0] = rs.getString(1);//成绩id
                 rss[i][1] = rs.getString(2);//课程id
                 rss[i][2] = rs.getString(4);//成绩
-                System.out.println(i+"."+rss[i][0]);
+//                System.out.println("i.id:"i+"."+rss[i][0]);
                 rs.next();//!!
             }
 

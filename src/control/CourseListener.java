@@ -2,6 +2,7 @@ package control;
 
 import model.CourseDatabase;
 import model.GradeDatabase;
+import model.Roster;
 
 import java.util.Vector;
 
@@ -34,7 +35,7 @@ public class CourseListener {
             gradeItem[i][1] = temp[i][1];
             gradeItem[i][2] = String.valueOf(id);
             gradeItem[i][3] = temp[i][2];
-            System.out.print(temp[i][0]);
+//            System.out.print("temp[i][0]:"+temp[i][0]);
 
         }
 
@@ -44,5 +45,23 @@ public class CourseListener {
     public String[][] queryCourse(int id,int type)
     {
         return new CourseDatabase().queryCourse(id,type);
+    }
+
+    public boolean addCourse(int stu_id,int course_id)
+    {
+        return new CourseDatabase().addCourse(stu_id,course_id);
+    }
+
+    public boolean output(int course_id)
+    {
+        if (new Roster().output(course_id))
+        {
+            System.out.println("导出成功");
+            return true;
+        }
+        else {
+            System.out.println("导出失败");
+            return false;
+        }
     }
 }

@@ -23,12 +23,14 @@ public class Student {
     JButton queryCourseButton = new JButton("查询课程");
     JButton queryGradeButton = new JButton("查询成绩");
     JButton watchNotice = new JButton("查看公告");
+    JButton addCourse = new JButton("选课");
 
     String[] stuTitles = {"姓名", "学号", "性别", "手机", "邮箱",
             "学院", "专业", "班级", "身份证", "培养方向", "学制", "入学年份", "备注"};
     String[] courseTitles = {"课程编号","课程名称","教师编号","教师名称","上课时间","上课地点","学期代号","课程描述"};
     String[] gradeTitles = {"成绩编号","课程编号","学生ID","成绩"};
     String[] noticeTitles = {"公告编号","标题","摘要","修改时间","创建时间"};
+    String[] addCourseTitle = {"课程编号"};
     DefaultTableModel studentTableModel = new DefaultTableModel();
     JTable studentWindowTable = new JTable(studentTableModel);
     JPanel jp = new JPanel(new BorderLayout());
@@ -52,6 +54,7 @@ public class Student {
         stuWindow.add(queryCourseButton);
         stuWindow.add(queryGradeButton);
         stuWindow.add(watchNotice);
+        stuWindow.add(addCourse);
         stuWindow.add(Box.createHorizontalStrut(1000));
         stuWindow.add(subtitle);
         stuWindow.add(Box.createHorizontalStrut(1000));
@@ -139,6 +142,22 @@ public class Student {
             }
         });
 
+        //选课
+        addCourse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stuWindow.remove(jp2);
+                stuWindow.add(jp);
+                jp.add(confirm,BorderLayout.SOUTH);
+
+                flag = 4;
+                studentTableModel.setDataVector(new Object[1][1],addCourseTitle);
+
+                stuWindow.repaint();
+                stuWindow.validate();
+            }
+        });
+
 
         confirm.addActionListener(new ActionListener() {
             @Override
@@ -152,8 +171,8 @@ public class Student {
 
                         break;
                     case 1:
-                        System.out.println("暂未实现");
-                        //studentTableModel.setDataVector(null,courseTitles);
+//                        System.out.println("暂未实现");
+                        studentTableModel.setDataVector(new CourseListener().queryCourse(id,2),courseTitles);
 
 
 
@@ -174,6 +193,13 @@ public class Student {
                         break;
 
                     case 4:
+                        if(new CourseListener().addCourse(id,Integer.valueOf((String) studentTableModel.getValueAt(0,0))))
+                        {
+                            System.out.println("选课成功");
+                        }
+                        else{
+                            System.out.println("选课失败");//输入必须是数字 查看公告获取选课代码
+                        }
                         break;
                 }
             }
