@@ -37,6 +37,9 @@ public class Faculty {
     JLabel subheading = new JLabel();
     JButton confirm = new JButton("确认");
 
+    JScrollPane jScrollPane = new JScrollPane(facultyWindowTable);
+
+
 
 
     String[] stuTitles = {"姓名", "学号", "性别", "手机", "邮箱",
@@ -51,6 +54,20 @@ public class Faculty {
 
     public void view(int id)
     {
+        facultyWindowTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        facultyWindowTable.setSize(900,500);
+//        facultyWindowTable.setPreferredSize(new Dimension(900,500));
+
+        jp.setPreferredSize(new Dimension(900,500));//!!
+//        System.out.println("jp:"+jp.getSize());
+
+
+        jp.add(facultyWindowTable.getTableHeader(),BorderLayout.NORTH);
+//        jp.add(facultyWindowTable);
+        jp.add(jScrollPane);
+        jp.add(confirm,BorderLayout.SOUTH);
+
         jp2.setLayout(new BorderLayout());
         jp2.add(title,BorderLayout.NORTH);
         jp2.add(content);
@@ -65,15 +82,13 @@ public class Faculty {
         jp.setLayout(new BorderLayout());
         facultyWindow.setVisible(true);
         facultyWindow.setSize(1000,800);
-        facultyWindow.add(Box.createHorizontalStrut(1000));
+        facultyWindow.add(Box.createHorizontalStrut(10000));
         //facultyWindow.add(jp);
         facultyWindow.add(subheading);
-        facultyWindow.add(Box.createHorizontalStrut(1000));
+        facultyWindow.add(Box.createHorizontalStrut(10000));
 
 
-        jp.add(facultyWindowTable.getTableHeader(),BorderLayout.NORTH);
-        jp.add(facultyWindowTable);
-        jp.add(confirm,BorderLayout.SOUTH);
+
 
 
 
@@ -82,6 +97,7 @@ public class Faculty {
         queryStuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(900,475);
                 flag = 0;
                 subheading.setText("查询学生信息");
                 facultyTableModel.setDataVector(new Object[1][13],stuTitles);
@@ -108,6 +124,10 @@ public class Faculty {
         course.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(815,475);
+//                System.out.println("jScrollPane:"+jScrollPane.getSize());
+//                System.out.println("jp:"+jp.getSize());
+//                System.out.println("tablesize:"+facultyWindowTable.getSize());
 
                 facultyTableModel.setDataVector(new Object[1][8],courseTitles);
                 flag = 1;
@@ -119,6 +139,9 @@ public class Faculty {
                 facultyWindow.remove(queryField);
                 jp.add(export,BorderLayout.EAST);
 
+//                jScrollPane.setSize(900,500);
+//                jp.setSize(950,600);
+
                 facultyWindow.repaint();
                 facultyWindow.validate();
             }
@@ -128,6 +151,7 @@ public class Faculty {
         watchNotice.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(900,475);
                 facultyTableModel.setDataVector(new Object[1][5],noticeTitles);
                 flag = 2;
                 subheading.setText("查看公告");
@@ -196,7 +220,6 @@ public class Faculty {
         export.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                System.out.println("敬请期待");
                 String temp = (String) facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),0);
                 System.out.println(temp);
                 if(!(temp.isEmpty()||temp.equals("")||temp==null||temp.equals("null"))){

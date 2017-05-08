@@ -32,6 +32,7 @@ public class StuManager {
 
     DefaultTableModel stuTableModel = new DefaultTableModel(new Object[1][21], titles);
     JTable stuTable = new JTable(stuTableModel);
+//    JScrollPane jScrollPane = new JScrollPane(stuTable);
 
     //JTable changeStuTable = new JTable();
 
@@ -51,8 +52,11 @@ public class StuManager {
 
     public void view()
     {
-        //jp.setLayout(new FlowLayout());
         jp.setLayout(new BorderLayout());
+
+//        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        stuTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//        jScrollPane.setSize(stuTable.getSize());
 
         stuManagerWindow.setLayout(new FlowLayout());
         stuManagerWindow.add(createStuButton);
@@ -64,6 +68,7 @@ public class StuManager {
         stuManagerWindow.add(jp);
 
         jp.add(stuTable.getTableHeader(),BorderLayout.NORTH);
+//        jp.add(jScrollPane);
         jp.add(stuTable);
         jp.add(confirm,BorderLayout.SOUTH);
 
@@ -77,6 +82,7 @@ public class StuManager {
         createStuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(jp.getSize());
                 flag = 0;
                 subheading.setText("新建学生信息");
 

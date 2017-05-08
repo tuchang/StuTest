@@ -124,10 +124,45 @@ public class UserDatabase {
         close();
     }
 
-    public void closeUser()
+    public void closeUser(Vector inputTable)
     {
         System.out.println("暂未实现，敬请期待");
         //将条目从系统用户数据库转入注销账户数据库
+    }
+
+    //彻底删除用户
+    public void deleteUser(Vector inputTable)
+    {
+        init();
+
+        for (int i=0;i<inputTable.size();i++)
+        {
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("系统管理员"))
+                type = 0;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("教务管理员"))
+                type = 3;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学院管理员"))
+                type = 4;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("教师"))
+                type = 1;
+            if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学生"))
+                type = 2;
+
+            sql = "DELETE FROM user_table WHERE user_pwd='"
+                    +((Vector)inputTable.elementAt(i)).elementAt(1) + "',"
+                    + " user_type="+type
+                    + " user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
+        }
+
+
+        try {
+            st.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        close();
+
     }
 
 

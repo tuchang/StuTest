@@ -104,6 +104,8 @@ public class CourseDatabase {
         if(type==1)//教师
         {
             sql = "select * from course where faculty_id="+id+";";
+
+
             System.out.println(sql);
             try {
                 rs = st.executeQuery(sql);
@@ -134,7 +136,34 @@ public class CourseDatabase {
         }
         else if(type==2)//学生
         {
-            String[] temp=null;
+            sql = "select * from course;";
+            try {
+                rs = st.executeQuery(sql);
+
+                int rowCount=0;
+                rs.last();
+                rowCount = rs.getRow();
+                rs.first();
+                resultCourse = new String[rowCount][8];
+//            System.out.println("行数:"+rowCount);
+
+                for(int i=0;i<rowCount;i++)
+                {
+                    resultCourse[i][0] = rs.getString(1);//课程id
+                    resultCourse[i][1] = rs.getString(2);//课程名字
+                    resultCourse[i][2] = rs.getString(3);//教师id
+                    resultCourse[i][3] = rs.getString(4);//教师名称
+                    resultCourse[i][4] = rs.getString(5);//时间
+                    resultCourse[i][5] = rs.getString(6);//地点
+                    resultCourse[i][6] = rs.getString(7);//学期
+                    resultCourse[i][7] = rs.getString(8);//描述
+                    rs.next();//!!
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+           /* String[] temp=null;
             sql = "select * from grade where stu_id="+id+";";
             System.out.println(sql);
             try {
@@ -172,7 +201,7 @@ public class CourseDatabase {
                 e.printStackTrace();
             } finally {
 
-            }
+            }*/
         }
 
         else if(type == 0)//课程id

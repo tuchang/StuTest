@@ -34,6 +34,7 @@ public class Student {
     DefaultTableModel studentTableModel = new DefaultTableModel();
     JTable studentWindowTable = new JTable(studentTableModel);
     JPanel jp = new JPanel(new BorderLayout());
+    JScrollPane jScrollPane = new JScrollPane(studentWindowTable);
 
 
     JButton confirm = new JButton("确认");
@@ -47,6 +48,8 @@ public class Student {
 
     public void view(int id)
     {
+        studentWindowTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 
         stuWindow.setLayout(new FlowLayout());
@@ -55,16 +58,17 @@ public class Student {
         stuWindow.add(queryGradeButton);
         stuWindow.add(watchNotice);
         stuWindow.add(addCourse);
-        stuWindow.add(Box.createHorizontalStrut(1000));
+        stuWindow.add(Box.createHorizontalStrut(10000));
         stuWindow.add(subtitle);
-        stuWindow.add(Box.createHorizontalStrut(1000));
+        stuWindow.add(Box.createHorizontalStrut(10000));
         stuWindow.add(jp);
 
         stuWindow.setVisible(true);
-        stuWindow.setSize(1000,400);
+        stuWindow.setSize(1000,560);
 
         jp.add(studentWindowTable.getTableHeader(),BorderLayout.NORTH);
-        jp.add(studentWindowTable);
+        jp.add(jScrollPane);
+//        jp.add(studentWindowTable);
         jp.add(confirm,BorderLayout.SOUTH);
 
         jp2.add(title,BorderLayout.NORTH);
@@ -74,6 +78,9 @@ public class Student {
         queryStuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(975,jScrollPane.getHeight());
+                jp.setPreferredSize(new Dimension(975,jp.getHeight()));
+
                 stuWindow.remove(jp2);
                 stuWindow.add(jp);
                 jp.add(confirm,BorderLayout.SOUTH);
@@ -91,6 +98,9 @@ public class Student {
         queryCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(975,jScrollPane.getHeight());
+                jp.setPreferredSize(new Dimension(975,jp.getHeight()));
+
                 stuWindow.remove(jp2);
                 stuWindow.add(jp);
                 jp.add(confirm,BorderLayout.SOUTH);
@@ -108,6 +118,9 @@ public class Student {
         queryGradeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(975,jScrollPane.getHeight());
+                jp.setPreferredSize(new Dimension(975,jp.getHeight()));
+
                 stuWindow.remove(jp2);
                 stuWindow.add(jp);
                 jp.add(confirm,BorderLayout.SOUTH);
@@ -123,6 +136,9 @@ public class Student {
         watchNotice.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(975,jScrollPane.getHeight());
+                jp.setPreferredSize(new Dimension(975,jp.getHeight()));
+
                 stuWindow.remove(jp2);
                 stuWindow.add(jp);
                 jp.add(confirm,BorderLayout.SOUTH);
@@ -146,6 +162,9 @@ public class Student {
         addCourse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                jScrollPane.setSize(975,jScrollPane.getHeight());
+                jp.setPreferredSize(new Dimension(975,jp.getHeight()));
+
                 stuWindow.remove(jp2);
                 stuWindow.add(jp);
                 jp.add(confirm,BorderLayout.SOUTH);
@@ -162,6 +181,9 @@ public class Student {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println(stuWindow.getSize());
+                System.out.println(jScrollPane.getSize());
+                System.out.println(jp.getSize());
                 switch (flag)
                 {
                     case 0:

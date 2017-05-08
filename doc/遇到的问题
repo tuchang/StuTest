@@ -28,3 +28,6 @@ tips 原来在Windows中很多路径分隔符写成\\了，看来以后写Java�
 目录写错 如果目录不存在要先创建目录
 不能有前面的file:
 url + getAbsolutePath
+
+文本框大小
+size preferredsize

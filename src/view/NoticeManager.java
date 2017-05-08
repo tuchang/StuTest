@@ -27,6 +27,8 @@ public class NoticeManager {
      String[] titles = {"公告编号","标题","摘要","修改时间","创建时间"};
      DefaultTableModel noticeTableModel = new DefaultTableModel(new Object[1][5],titles);
      JTable noticeTable = new JTable(noticeTableModel);
+     JScrollPane jScrollPane = new JScrollPane(noticeTable);
+
      JTextField title = new JTextField("请输入标题");
      JTextArea content = new JTextArea("请输入公告内容。",30,40);
      JButton confirm = new JButton("确认");
@@ -39,16 +41,17 @@ public class NoticeManager {
 
     void view()
     {
-
+        noticeTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 
         noticeManagerWindow.setLayout(new FlowLayout());
         noticeManagerWindow.add(createNoticeButton);
         noticeManagerWindow.add(changeNoticeButton);
         noticeManagerWindow.add(watchNoticeButton);
-        noticeManagerWindow.add(Box.createHorizontalStrut(1000));
+        noticeManagerWindow.add(Box.createHorizontalStrut(10000));
         noticeManagerWindow.add(subtitle);
-        noticeManagerWindow.add(Box.createHorizontalStrut(1000));
+        noticeManagerWindow.add(Box.createHorizontalStrut(10000));
 
         //noticeManagerWindow.add(noticeTable);
         noticeManagerWindow.setVisible(true);
@@ -58,7 +61,7 @@ public class NoticeManager {
 
 
         jp.add(noticeTable.getTableHeader(),BorderLayout.NORTH);
-        jp.add(noticeTable);
+        jp.add(jScrollPane);
         jp.add(confirm,BorderLayout.SOUTH);
 
         jp2.add(title,BorderLayout.NORTH);

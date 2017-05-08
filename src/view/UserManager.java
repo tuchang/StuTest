@@ -31,8 +31,6 @@ public class UserManager {
 
     int flag = -1;
 
-
-
     void view()
     {
         userManagerWindow.setLayout(new FlowLayout());
@@ -53,8 +51,6 @@ public class UserManager {
         jp.add(userTable);
         jp.add(ok,BorderLayout.SOUTH);
 
-
-
         createUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,7 +59,6 @@ public class UserManager {
                 userTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jcb));
             }
         });
-
         changeUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,7 +67,6 @@ public class UserManager {
                 userTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jcb));
             }
         });
-
         closeUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,9 +74,6 @@ public class UserManager {
                 flag = 2;
             }
         });
-
-
-
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,12 +83,13 @@ public class UserManager {
                         break;
                     case 1: new UserDatabase().changeUser(userTableModel.getDataVector());
                         break;
-                    case 2: new UserDatabase().closeUser();
+                    case 2:
+//                        new UserDatabase().closeUser();
+                        new UserDatabase().deleteUser(userTableModel.getDataVector());
                         break;
                 }
             }
         });
-
         userManagerWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -106,7 +98,5 @@ public class UserManager {
                 userManagerWindow.dispose();
             }
         });
-
-
     }
 }

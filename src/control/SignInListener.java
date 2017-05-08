@@ -56,7 +56,7 @@ public class SignInListener implements ActionListener
 
 
         //System.out.println(type.getSelectedIndex());
-//        if (lg.getPwd().equals(password.getText())&&captchaText.getText().equals(captcha.getCaptchaCode()))
+//        if (lg.getPwd().equals(password.getPassword())&&captchaText.getText().equals(captcha.getCaptchaCode()))
         {
             switch (type.getSelectedIndex())
             {

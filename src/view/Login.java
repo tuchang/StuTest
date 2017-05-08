@@ -27,19 +27,21 @@ public class Login {
         loginWindow.setLayout(new FlowLayout());
         loginWindow.add(new JLabel("用户名:"));
         loginWindow.add(username);
-        loginWindow.add(Box.createHorizontalStrut(1000));
+        loginWindow.add(Box.createHorizontalStrut(10000));
         loginWindow.add(new JLabel("密码:"));
         loginWindow.add(password);
-        loginWindow.add(Box.createHorizontalStrut(1000));
+        loginWindow.add(Box.createHorizontalStrut(10000));
         loginWindow.add(type);
-        loginWindow.add(Box.createHorizontalStrut(1000));
+        loginWindow.add(Box.createHorizontalStrut(10000));
         loginWindow.add(jp);
         loginWindow.add(captchaText);
-        loginWindow.add(Box.createHorizontalStrut(1000));
+        loginWindow.add(Box.createHorizontalStrut(10000));
         loginWindow.add(signIn);
         loginWindow.add(exit);
         loginWindow.setSize(400,200);
         loginWindow.setVisible(true);
+
+
 
         loginWindow.addWindowListener(new WindowAdapter() {
             @Override
