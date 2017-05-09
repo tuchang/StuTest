@@ -76,7 +76,7 @@ public class UserDatabase {
                     +((Vector)inputTable.elementAt(i)).elementAt(1)+"',"
 //                    +((Vector)inputTable.elementAt(i)).elementAt(2)+");";
                     +type+");";
-            System.out.println(sql);
+//            System.out.println(sql);
             try {
                 st.execute(sql);
             } catch (SQLException e) {
@@ -113,7 +113,7 @@ public class UserDatabase {
                     + " where user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
         }
 
-        System.out.println(sql);
+//        System.out.println(sql);
 
         try {
             st.execute(sql);

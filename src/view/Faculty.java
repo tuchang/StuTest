@@ -210,7 +210,7 @@ public class Faculty {
                         jp2.add(confirm,BorderLayout.SOUTH);
                         title.setText((String) facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),1));
                         content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),0)))));
-                        System.out.println(facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),0));
+//                        System.out.println(facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),0));
                         facultyWindow.repaint();
                         facultyWindow.validate();
                         break;
@@ -226,11 +226,11 @@ public class Faculty {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String temp = (String) facultyTableModel.getValueAt(facultyWindowTable.getSelectedRow(),0);
-                System.out.println(temp);
+//                System.out.println(temp);
                 if(!(temp.isEmpty()||temp.equals("")||temp==null||temp.equals("null"))){
                     new CourseListener().output(Integer.parseInt(temp));
                 }else {
-                    System.out.println("已选择项的第一个字段为空或不符合要求");
+                    JOptionPane.showMessageDialog(new JFrame(), "已选择项的第一个字段为空或不符合要求", "提示", JOptionPane.WARNING_MESSAGE);
                 }
 
             }

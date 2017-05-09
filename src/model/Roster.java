@@ -59,7 +59,7 @@ public class Roster {
             //利用已经创建的Excel工作薄,创建新的可写入的Excel工作薄
             String xlsName = "/Users/tuchang/IdeaProjects/StuTest/RosterArchive/"
                     + course_id+"-"+course_name+"-"+faculty_name+".xls";
-            System.out.println(xlsName);
+//            System.out.println(xlsName);
             jxl.write.WritableWorkbook wwb = Workbook.createWorkbook(new File(
                     xlsName), readwb);
             //读取第一张工作表

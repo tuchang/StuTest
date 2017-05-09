@@ -140,7 +140,7 @@ public class NoticeManager {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("flag."+flag);
+//                System.out.println("flag."+flag);
                 switch(flag)
                 {
                     //create
@@ -154,7 +154,7 @@ public class NoticeManager {
                         jp2.add(confirm,BorderLayout.SOUTH);
                         title.setText((String) noticeTableModel.getValueAt(noticeTable.getSelectedRow(),1));
                         content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0)))));
-                        System.out.println(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0));
+//                        System.out.println(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0));
 
 
                         noticeManagerWindow.repaint();
@@ -169,7 +169,7 @@ public class NoticeManager {
                         jp2.add(confirm,BorderLayout.SOUTH);
                         title.setText((String) noticeTableModel.getValueAt(noticeTable.getSelectedRow(),1));
                         content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0)))));
-                        System.out.println(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0));
+//                        System.out.println(noticeTableModel.getValueAt(noticeTable.getSelectedRow(),0));
                         noticeManagerWindow.repaint();
                         noticeManagerWindow.validate();
                         break;

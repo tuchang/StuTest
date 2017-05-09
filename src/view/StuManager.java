@@ -82,7 +82,7 @@ public class StuManager {
         createStuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(jp.getSize());
+//                System.out.println(jp.getSize());
                 flag = 0;
                 subheading.setText("新建学生信息");
 
@@ -189,7 +189,7 @@ public class StuManager {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println("flag."+flag);
+//                System.out.println("flag."+flag);
 //                System.out.println(new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText()
 //                        ,stuTableModel.getDataVector()));
 

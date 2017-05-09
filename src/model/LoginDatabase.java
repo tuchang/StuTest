@@ -35,7 +35,7 @@ public class LoginDatabase {
 
             sql = "select * from user_table where user_name='"+username+"';";
 
-            System.out.println(sql);
+//            System.out.println(sql);
             rs = st.executeQuery(sql);
 
 

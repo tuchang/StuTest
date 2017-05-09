@@ -48,8 +48,9 @@ public class GradeDatabase {
         }
     }
 
-    public void setGrade(Vector inputVector)
+    public int setGrade(Vector inputVector)
     {
+        int mark = -1;
         //!!
         if(((String)((Vector) inputVector.elementAt(0)).elementAt(1)).isEmpty()
                 ||((String)((Vector) inputVector.elementAt(0)).elementAt(1))==null||((String)((Vector) inputVector.elementAt(0)).elementAt(1)).equals("null"))
@@ -63,20 +64,27 @@ public class GradeDatabase {
                         + ((Vector) inputVector.elementAt(i)).elementAt(1) + ","
                         + ((Vector) inputVector.elementAt(i)).elementAt(2) + ","
                         + ((Vector) inputVector.elementAt(i)).elementAt(3) + ");";
-                System.out.println(sql);
+//                System.out.println(sql);
                 try {
                     st.execute(sql);
+                    mark=0;
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    return mark;
                 }
                 finally {
+
                     close();
+                    return mark;
                 }
             }
 
         }
-        else updateGrade(inputVector);
-
+        else {
+            updateGrade(inputVector);
+            mark = 1;
+        }
+        return mark;
 
     }
 
@@ -98,7 +106,7 @@ public class GradeDatabase {
                     +" where course_id ="+((Vector)inputVector.elementAt(i)).elementAt(1)
                     +" AND stu_id ="+((Vector)inputVector.elementAt(i)).elementAt(2)
                     +";";
-            System.out.println(sql);
+//            System.out.println(sql);
             try {
                 st.execute(sql);
             } catch (SQLException e) {
@@ -116,7 +124,7 @@ public class GradeDatabase {
         String[][] rss = null;
         sql = "select * from grade where stu_id = "+id+";";
 
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             rs = st.executeQuery(sql);
             int rowCount=0;

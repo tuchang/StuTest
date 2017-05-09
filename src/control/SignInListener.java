@@ -73,14 +73,14 @@ public class SignInListener implements ActionListener
         }
 
         LoginData lg = loginModel.getLoginData(username.getText());
-        System.out.println(lg.getTpye());
-        System.out.println(type.getSelectedIndex());
+//        System.out.println(lg.getTpye());
+//        System.out.println(type.getSelectedIndex());
         if (lg.getUsr()==null)
         {
             JOptionPane.showMessageDialog(new JFrame(), "用户名或密码错误", "登陆失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        System.out.println(lg);
+//        System.out.println(lg);
         if (!lg.getTpye().equals(String.valueOf(type.getSelectedIndex())))
         {
             JOptionPane.showMessageDialog(new JFrame(), "登陆失败", "提示", JOptionPane.WARNING_MESSAGE);

@@ -100,14 +100,14 @@ public class NoticeDatabase {
         //!!Windows处理
         input[4]=input[4].replaceAll("\\\\","\\\\\\\\");
 
-        System.out.println("input[4]:"+input[4]);
+//        System.out.println("input[4]:"+input[4]);
         sql = "insert into notice_table values(null,'"
                 +input[0]+"','"
                 +input[1]+"','"
                 +input[2]+"','"
                 +input[3]+"','"
                 +input[4]+"');";
-        System.out.println("sql:"+sql);
+//        System.out.println("sql:"+sql);
         try {
             st.execute(sql);
         } catch (SQLException e) {
@@ -139,7 +139,7 @@ public class NoticeDatabase {
                     +"',abstract='" +input[1]
                     +"',modify_time='" +input[2]
                     +"' where id="+id+";";
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             st.execute(sql);
         } catch (SQLException e) {

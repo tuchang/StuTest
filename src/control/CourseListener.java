@@ -19,17 +19,54 @@ public class CourseListener {
     Roster rosterModel = (Roster) applicationContext.getBean("rosterModel");
     public void createCourse(Vector dataVector)
     {
-        courseModel.createCourse(dataVector);
+        try{
+            if (courseModel.createCourse(dataVector))
+            {
+                JOptionPane.showMessageDialog(new JFrame(), "添加课程信息成功", "提示", JOptionPane.WARNING_MESSAGE);
+            }
+        else{
+                JOptionPane.showMessageDialog(new JFrame(), "添加课程信息失败", "提示", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(new JFrame(), "添加课程信息失败", "提示", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
     public void changeCourse(Vector dataVector)
     {
-        courseModel.changeCourse(dataVector);
+        try {
+            if (courseModel.changeCourse(dataVector))
+            {
+                JOptionPane.showMessageDialog(new JFrame(), "修改课程信息成功", "提示", JOptionPane.WARNING_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(new JFrame(), "修改课程信息失败", "提示", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(new JFrame(), "修改课程信息失败", "提示", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
     public void setGrade(Vector dataVector)
     {
-        gradeModel.setGrade(dataVector);
+        try{
+            int mark = -1;
+            mark=gradeModel.setGrade(dataVector);
+            if (mark==0){
+                JOptionPane.showMessageDialog(new JFrame(), "设置成绩成功", "提示", JOptionPane.WARNING_MESSAGE);
+            }
+            else if(mark==1){
+                JOptionPane.showMessageDialog(new JFrame(), "修改成绩成功", "提示", JOptionPane.WARNING_MESSAGE);
+            }
+            else if (mark==-1)
+            {
+                JOptionPane.showMessageDialog(new JFrame(), "设置成绩失败", "提示", JOptionPane.WARNING_MESSAGE);
+            }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(new JFrame(), "设置成绩失败", "提示", JOptionPane.WARNING_MESSAGE);
+        }
+
     }
 
     public String[][] getGrade(int id)

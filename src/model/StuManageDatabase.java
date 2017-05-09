@@ -77,7 +77,7 @@ public class StuManageDatabase {
                     + ((Vector) inputTables.get(i)).get(19) +"','"
                     + ((Vector) inputTables.get(i)).get(20) +"');";
 
-            System.out.println(sql);
+//            System.out.println(sql);
 
 ////            st.execute(sql);
 //        } catch (SQLException e) {
@@ -120,7 +120,7 @@ public class StuManageDatabase {
                     +"' where stu_id="+((Vector) inputTables.get(i)).get(1)+";";
         }
 
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             st.execute(sql);
         } catch (SQLException e) {
@@ -213,7 +213,7 @@ public class StuManageDatabase {
 
         try {
             //sql = "select * from student_information where "+type+"='"+queryText+"';";
-            System.out.println(sql);
+//            System.out.println(sql);
             rs = st.executeQuery(sql);
 
 

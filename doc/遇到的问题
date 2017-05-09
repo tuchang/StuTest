@@ -31,5 +31,5 @@ url + getAbsolutePath
 
 文本框大小
 size preferredsize
-JOptionPane.showMessageDialog(frame, "请输入用户名", "提示", JOptionPane.WARNING_MESSAGE);
+JOptionPane.showMessageDialog(new JFrame(), "请输入用户名", "提示", JOptionPane.WARNING_MESSAGE);
 password.getPassword() char[] 没有重写toString() 使用String.valueOf()

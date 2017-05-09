@@ -83,7 +83,7 @@ public class Login {
                 loginWindow.repaint();
                 loginWindow.revalidate();
 
-                System.out.println("你点击了一次验证码 验证码是"+captcha.getCaptchaCode());
+//                System.out.println("你点击了一次验证码 验证码是"+captcha.getCaptchaCode());
             }
         });
 

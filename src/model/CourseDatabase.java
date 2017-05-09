@@ -1,5 +1,6 @@
 package model;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.Vector;
 
@@ -46,8 +47,9 @@ public class CourseDatabase {
         }
     }
 
-    public void createCourse(Vector inputVector)
+    public boolean createCourse(Vector inputVector)
     {
+        boolean b=false;
         init();
 
         for (int i=0;i<inputVector.size();i++)
@@ -61,17 +63,20 @@ public class CourseDatabase {
                     +((Vector)inputVector.elementAt(i)).elementAt(6)+",'"
                     +((Vector)inputVector.elementAt(i)).elementAt(7)+"');";
 
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             st.execute(sql);
+            b=true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         }
         close();
+        return b;
     }
 
-    public void changeCourse(Vector inputVector) {
+    public boolean changeCourse(Vector inputVector) {
+        boolean b= false;
         init();
 
         for (int i = 0; i < inputVector.size(); i++)
@@ -85,16 +90,21 @@ public class CourseDatabase {
                     + "',session=" + ((Vector) inputVector.elementAt(i)).elementAt(6)
                     + ",description='" + ((Vector) inputVector.elementAt(i)).elementAt(7)
                     + "' where course_id=" + ((Vector) inputVector.elementAt(i)).elementAt(0) + ";";
-            System.out.println(sql);
+//            System.out.println(sql);
             try {
                 st.execute(sql);
+
             } catch (SQLException e) {
                 e.printStackTrace();
+                return b;
             }
+
         }
 
+        b=true;
 
         close();
+        return b;
     }
 
     public String[][] queryCourse(int id,int type)
@@ -106,7 +116,7 @@ public class CourseDatabase {
             sql = "select * from course where faculty_id="+id+";";
 
 
-            System.out.println(sql);
+//            System.out.println(sql);
             try {
                 rs = st.executeQuery(sql);
 
@@ -208,7 +218,7 @@ public class CourseDatabase {
         {
             resultCourse = new String[1][8];
             sql = "select * from course where course_id="+id+";";
-            System.out.println(sql);
+//            System.out.println(sql);
             try {
                 rs = st.executeQuery(sql);
 
@@ -223,7 +233,7 @@ public class CourseDatabase {
                     resultCourse[0][6] = rs.getString(7);//学期
                     resultCourse[0][7] = rs.getString(8);//描述
                 }else{
-                    System.out.println("查询课程id结果为空");
+                    JOptionPane.showMessageDialog(new JFrame(), "查询课程id结果为空", "提示", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -241,7 +251,7 @@ public class CourseDatabase {
             sql = "insert into grade values(null,"+course_id
                     +","+stu_id
                     +",null);";
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             st.execute(sql);
             return true;
@@ -262,7 +272,7 @@ public class CourseDatabase {
         try
         {
             sql = "select stu_id from grade where course_id="+course_id+";";
-            System.out.println(sql);
+//            System.out.println(sql);
             rs=st.executeQuery(sql);
             if(rs.next())
             {
@@ -276,7 +286,7 @@ public class CourseDatabase {
                     stu_id[i] = Integer.parseInt(rs.getString(1));
                 }
             }else {
-                System.out.println("查询选课学生结果为空");
+                JOptionPane.showMessageDialog(new JFrame(), "查询选课学生结果为空", "提示", JOptionPane.WARNING_MESSAGE);
                 return null;
             }
         } catch (SQLException e) {

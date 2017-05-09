@@ -184,9 +184,9 @@ public class Student {
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(stuWindow.getSize());
-                System.out.println(jScrollPane.getSize());
-                System.out.println(jp.getSize());
+//                System.out.println(stuWindow.getSize());
+//                System.out.println(jScrollPane.getSize());
+//                System.out.println(jp.getSize());
                 switch (flag)
                 {
                     case 0:
@@ -212,18 +212,22 @@ public class Student {
                         jp2.add(confirm,BorderLayout.SOUTH);
                         title.setText((String) studentTableModel.getValueAt(studentWindowTable.getSelectedRow(),1));
                         content.setText(new NoticeControl().watchNotice(Integer.valueOf(String.valueOf(studentTableModel.getValueAt(studentWindowTable.getSelectedRow(),0)))));
-                        System.out.println(studentTableModel.getValueAt(studentWindowTable.getSelectedRow(),0));
+//                        System.out.println(studentTableModel.getValueAt(studentWindowTable.getSelectedRow(),0));
                         stuWindow.repaint();
                         stuWindow.validate();
                         break;
 
                     case 4:
-                        if(new CourseListener().addCourse(id,Integer.valueOf((String) studentTableModel.getValueAt(0,0))))
-                        {
-                            System.out.println("选课成功");
-                        }
-                        else{
-                            System.out.println("选课失败");//输入必须是数字 查看公告获取选课代码
+                        try{
+                            if(new CourseListener().addCourse(id,Integer.valueOf((String) studentTableModel.getValueAt(0,0))))
+                            {
+                                JOptionPane.showMessageDialog(new JFrame(), "选课成功", "提示", JOptionPane.WARNING_MESSAGE);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(new JFrame(), "选课失败，输入必须是数字，查看公告获取选课代码。", "提示", JOptionPane.WARNING_MESSAGE);//输入必须是数字 查看公告获取选课代码
+                            }
+                        }catch (Exception e2){
+                            JOptionPane.showMessageDialog(new JFrame(), "选课失败，输入必须是数字，查看公告获取选课代码。", "提示", JOptionPane.WARNING_MESSAGE);
                         }
                         break;
                 }

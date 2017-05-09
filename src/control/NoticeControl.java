@@ -25,7 +25,7 @@ public class NoticeControl {
 
         String path = new Thread().currentThread().getContextClassLoader().getResource("")+"../../../NoticeArchive/"+ calculateId()+".txt";
         //获得当前路径后前面会有一段file: 需要去掉 不然mac端无法createNewFile
-        System.out.println(path);
+//        System.out.println(path);
         if(path.contains("file:"))
         {
             URL url = FileTest.class.getResource("");
@@ -36,7 +36,7 @@ public class NoticeControl {
             }
         }
 
-        System.out.println(path);
+//        System.out.println(path);
 
 
 
@@ -49,7 +49,7 @@ public class NoticeControl {
 //        }
 
 
-        System.out.println(path);
+//        System.out.println(path);
 
 
         String abstractString = null;
@@ -68,25 +68,25 @@ public class NoticeControl {
         input[2] = LocalDate.now().toString()+"-"+ LocalTime.now().toString();
         input[3] = input[2];
 
-        System.out.println("Date.");
+//        System.out.println("Date.");
 
         File outFile = new File(path);
         try {
 
             if (!outFile.exists())
             {
-                System.out.println(path);
+//                System.out.println(path);
                 outFile.createNewFile();
             }
-            System.out.println("Stream.");
+//            System.out.println("Stream.");
             FileOutputStream fos = new FileOutputStream(outFile);
             fos.write(content.getBytes());
-            System.out.println("Write.");
+//            System.out.println("Write.");
             fos.close();
 
 
             input[4] = outFile.getCanonicalPath();
-            System.out.println("Path.");
+//            System.out.println("Path.");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class NoticeControl {
 
             if (!outFile.exists())
             {
-                System.out.println(path);
+//                System.out.println(path);
                 outFile.createNewFile();
             }
 
