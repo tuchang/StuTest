@@ -11,48 +11,35 @@ public class StuManageDatabase {
     String url = "jdbc:mysql://localhost:3306/JDBCTest?useUnicode=true&characterEncoding=utf-8";
     String user = "root";
     String pwd = "fortest";
-
     String sql = null;
     Connection conn =null;
     Statement st = null;
     ResultSet rs = null;
-
-
-
     void init()
     {
-
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url,user,pwd);
             st = conn.createStatement();
-//            System.out.println("init.st:"+st);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
     void close()
     {
         try {
-            //rs.close();
             st.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
     public String[][] createStu(Vector inputTables)
     {
         init();
-//        System.out.println("hehe.");
-//        try {
+        try {
             for(int i=0;i<inputTables.size();i++)
             sql = "insert into student_information values('"
                     + ((Vector) inputTables.get(i)).get(0) +"',"
@@ -76,24 +63,16 @@ public class StuManageDatabase {
                     + ((Vector) inputTables.get(i)).get(18) +",'"
                     + ((Vector) inputTables.get(i)).get(19) +"','"
                     + ((Vector) inputTables.get(i)).get(20) +"');";
-
-//            System.out.println(sql);
-
-////            st.execute(sql);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-
-
+            st.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         close();
-
         return new String[1][13];
     }
-
     public String[][] changeStu(Vector inputTables)
     {
         init();
-
         for (int i=0;i<inputTables.size();i++)
         {
             sql = "update student_information set stu_name='"
@@ -119,26 +98,18 @@ public class StuManageDatabase {
                     +"', notes='" + ((Vector) inputTables.get(i)).get(20)
                     +"' where stu_id="+((Vector) inputTables.get(i)).get(1)+";";
         }
-
-//        System.out.println(sql);
         try {
             st.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         close();
         return new String[0][];
     }
-
     public String[][] queryStu(int itemType, String queryText)
     {
-        //System.out.println("进入queryStu");
         init();
-//        System.out.println("st:"+st);
-
         String[][] rss = new String[1][21];
-        //String[][] rss = null;
         String type = null;
         switch (itemType)
         {
@@ -201,28 +172,11 @@ public class StuManageDatabase {
                 queryText = "'"+queryText+"'";
                 break;
         }
-
-
-
-
         sql = "select * from student_information where "+type+"="+queryText+";";
-        //sql = "select * from student_information;";
-
-        //System.out.println(sql);
-
-
         try {
-            //sql = "select * from student_information where "+type+"='"+queryText+"';";
-//            System.out.println(sql);
             rs = st.executeQuery(sql);
-
-
-
-            //System.out.println("rs.1:"+rs.getString(1));
-
             for(int i=0;rs.next();i++)
             {
-                //System.out.println("rs.0:"+rs.getString(1));
                 rss[i][0]=rs.getString(1);
                 rss[i][1]=rs.getString(2);
                 rss[i][2]=rs.getString(3);
@@ -244,16 +198,10 @@ public class StuManageDatabase {
                 rss[i][18]=rs.getString(19);
                 rss[i][19]=rs.getString(20);
                 rss[i][20]=rs.getString(21);
-
-
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        //System.out.println(rss);
-
         close();
         return rss;
     }

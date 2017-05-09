@@ -10,6 +10,9 @@ import java.net.URL;
  */
 public class FileTest {
     public static void main(String[] args) {
+        new FileTest().test2();
+    }
+    void test1(){
         //String path = "/Users/tuchang/IdeaProjects/StuTest/out/production/StuTest/../../../NoticeArchive/a.txt";
         String path = "file:/Users/tuchang/IdeaProjects/StuTest/out/production/StuTest/../../../NoticeArchive/a.txt";
         File file = new File(path);
@@ -51,6 +54,18 @@ public class FileTest {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+    void test2()
+    {
+        try {
+            System.out.println("C:\\Users\\hasee\\IdeaProjects\\StuTest\\RosterArchive\\名册模板.xlsx");
+            FileInputStream fis =null;
+            System.out.println(fis);
+            fis =new FileInputStream(Thread.currentThread().getContextClassLoader().getResource("")+"..\\..\\..\\RosterArchive\\名册模板.xls");
+            System.out.println(fis);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

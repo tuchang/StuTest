@@ -12,18 +12,12 @@ public class CourseDatabase {
     String url = "jdbc:mysql://localhost:3306/JDBCTest?useUnicode=true&characterEncoding=utf-8";
     String user = "root";
     String pwd = "fortest";
-
     String sql = null;
     Connection conn =null;
     Statement st = null;
     ResultSet rs = null;
-
-
-
     void init()
     {
-
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url,user,pwd);
@@ -33,20 +27,16 @@ public class CourseDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
     void close()
     {
         try {
-            //rs.close();
             st.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     public boolean createCourse(Vector inputVector)
     {
         boolean b=false;
@@ -62,23 +52,19 @@ public class CourseDatabase {
                     +((Vector)inputVector.elementAt(i)).elementAt(5)+"',"
                     +((Vector)inputVector.elementAt(i)).elementAt(6)+",'"
                     +((Vector)inputVector.elementAt(i)).elementAt(7)+"');";
-
-//        System.out.println(sql);
-        try {
-            st.execute(sql);
-            b=true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            try {
+                st.execute(sql);
+                b=true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         close();
         return b;
     }
-
     public boolean changeCourse(Vector inputVector) {
         boolean b= false;
         init();
-
         for (int i = 0; i < inputVector.size(); i++)
         {
             sql = "update course set "
@@ -90,23 +76,17 @@ public class CourseDatabase {
                     + "',session=" + ((Vector) inputVector.elementAt(i)).elementAt(6)
                     + ",description='" + ((Vector) inputVector.elementAt(i)).elementAt(7)
                     + "' where course_id=" + ((Vector) inputVector.elementAt(i)).elementAt(0) + ";";
-//            System.out.println(sql);
             try {
                 st.execute(sql);
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return b;
             }
-
         }
-
         b=true;
-
         close();
         return b;
     }
-
     public String[][] queryCourse(int id,int type)
     {
         init();
@@ -114,19 +94,13 @@ public class CourseDatabase {
         if(type==1)//教师
         {
             sql = "select * from course where faculty_id="+id+";";
-
-
-//            System.out.println(sql);
             try {
                 rs = st.executeQuery(sql);
-
                 int rowCount=0;
                 rs.last();
                 rowCount = rs.getRow();
                 rs.first();
                 resultCourse = new String[rowCount][8];
-//            System.out.println("行数:"+rowCount);
-
                 for(int i=0;i<rowCount;i++)
                 {
                     resultCourse[i][0] = rs.getString(1);//课程id
@@ -142,21 +116,17 @@ public class CourseDatabase {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
         else if(type==2)//学生
         {
             sql = "select * from course;";
             try {
                 rs = st.executeQuery(sql);
-
                 int rowCount=0;
                 rs.last();
                 rowCount = rs.getRow();
                 rs.first();
                 resultCourse = new String[rowCount][8];
-//            System.out.println("行数:"+rowCount);
-
                 for(int i=0;i<rowCount;i++)
                 {
                     resultCourse[i][0] = rs.getString(1);//课程id
@@ -172,56 +142,13 @@ public class CourseDatabase {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-           /* String[] temp=null;
-            sql = "select * from grade where stu_id="+id+";";
-            System.out.println(sql);
-            try {
-                rs = st.executeQuery(sql);
-                int rowCount=0;
-                rs.last();
-                rowCount = rs.getRow();
-                rs.first();
-                temp = new String[rowCount];
-//                System.out.println("行数:"+rowCount);
-                for(int i=0;i<rowCount;i++)
-                {
-                    temp[i] = rs.getString(2);//课程id
-                    rs.next();//!!
-                }
-                resultCourse = new String[rowCount][8];
-                for(int i=0;i<rowCount;i++)
-                {
-                    sql = "select * from course where course_id="+temp[i]+";";
-                    System.out.println(i+":"+sql);
-                    rs = st.executeQuery(sql);
-                    if (rs.first())
-                    {
-                        resultCourse[i][0] = rs.getString(1);//课程id
-                        resultCourse[i][1] = rs.getString(2);//课程名字
-                        resultCourse[i][2] = rs.getString(3);//教师id
-                        resultCourse[i][3] = rs.getString(4);//教师名称
-                        resultCourse[i][4] = rs.getString(5);//时间
-                        resultCourse[i][5] = rs.getString(6);//地点
-                        resultCourse[i][6] = rs.getString(7);//学期
-                        resultCourse[i][7] = rs.getString(8);//描述
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-
-            }*/
         }
-
         else if(type == 0)//课程id
         {
             resultCourse = new String[1][8];
             sql = "select * from course where course_id="+id+";";
-//            System.out.println(sql);
             try {
                 rs = st.executeQuery(sql);
-
                 if (rs.next())
                 {
                     resultCourse[0][0] = rs.getString(1);//课程id
@@ -242,16 +169,12 @@ public class CourseDatabase {
             close();
         return resultCourse;
     }
-
-
     public boolean addCourse(int stu_id,int course_id)
     {
         init();
-
             sql = "insert into grade values(null,"+course_id
                     +","+stu_id
                     +",null);";
-//        System.out.println(sql);
         try {
             st.execute(sql);
             return true;
@@ -261,18 +184,14 @@ public class CourseDatabase {
         }finally {
             close();
         }
-
     }
-
     public int[] queryStu(int course_id)
     {
         init();
         int[] stu_id = null;
-
         try
         {
             sql = "select stu_id from grade where course_id="+course_id+";";
-//            System.out.println(sql);
             rs=st.executeQuery(sql);
             if(rs.next())
             {

@@ -22,41 +22,33 @@ public class UserManager implements LogInterface {
     JButton changeUserButton = new JButton("修改用户");
     JButton closeUserButton = new JButton("注销用户");//弹窗提醒
     JButton ok = new JButton("确认");
-
     JPanel jp = new JPanel();
     String[] titles = {"用户名","密码","身份类型"};
     DefaultTableModel userTableModel = new DefaultTableModel(new String[1][3],titles);
     JTable userTable = new JTable(userTableModel);
     JLabel subTitle = new JLabel();
-
     String[] types = {"系统管理员","教务管理员","学院管理员","教师","学生"};
     JComboBox jcb = new JComboBox(types);
-
     int flag = -1;
-
     public void view()
     {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
         UserDatabase userDatabase = (UserDatabase) applicationContext.getBean("userModel");
-
         userManagerWindow.setLayout(new FlowLayout());
         userManagerWindow.add(createUserButton);
         userManagerWindow.add(changeUserButton);
         userManagerWindow.add(closeUserButton);
         userManagerWindow.setVisible(true);
         userManagerWindow.setSize(400,300);
-
         userManagerWindow.add(Box.createHorizontalStrut(1000));
         userManagerWindow.add(subTitle);
         userManagerWindow.add(Box.createHorizontalStrut(1000));
         userManagerWindow.add(jp);
         userManagerWindow.add(Box.createHorizontalStrut(1000));
-
         jp.setLayout(new BorderLayout());
         jp.add(userTable.getTableHeader(),BorderLayout.NORTH);
         jp.add(userTable);
         jp.add(ok,BorderLayout.SOUTH);
-
         createUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +82,17 @@ public class UserManager implements LogInterface {
                     case 1: userDatabase.changeUser(userTableModel.getDataVector());
                         break;
                     case 2:
-                        userDatabase.deleteUser(userTableModel.getDataVector());
+                        try {
+                            if(userDatabase.deleteUser(userTableModel.getDataVector())){
+                                JOptionPane.showMessageDialog(new JFrame(), "删除成功", "提示", JOptionPane.WARNING_MESSAGE);
+                            }else{
+
+                                JOptionPane.showMessageDialog(new JFrame(), "删除失败", "提示", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }catch (Exception e2)
+                        {
+                            JOptionPane.showMessageDialog(new JFrame(), "删除失败", "提示", JOptionPane.WARNING_MESSAGE);
+                        }
                         break;
                 }
             }

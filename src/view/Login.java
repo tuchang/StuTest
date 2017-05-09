@@ -1,4 +1,4 @@
-package view;//import control.SignIn;
+package view;
 
 import Test.Captcha;
 import control.SignInListener;
@@ -17,11 +17,7 @@ public class Login {
     public static JPanel jp = new JPanel();
     public static void view()
     {
-//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
-//        SignInListener signInListener = (SignInListener) applicationContext.getBean("signInListener");
-
         jp.add(captchaImg);
-
         type.addItem("管理员");
         type.addItem("教师");
         type.addItem("学生");
@@ -44,49 +40,31 @@ public class Login {
         loginWindow.add(exit);
         loginWindow.setSize(400,200);
         loginWindow.setVisible(true);
-
-
-
         loginWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
-
         signIn.addActionListener(new SignInListener());
-
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
         });
-
         jp.addMouseListener(new MouseAdapter() {
-            /**
-             * {@inheritDoc}
-             *
-             * @param e
-             */
             @Override
             public void mouseClicked(MouseEvent e) {
                 captcha = null;
                 captcha = new Captcha();
                 captchaImg = captcha.getCaptchaImage();
-//                loginWindow.remove(jp);
                 jp.removeAll();
                 jp.add(captchaImg);
-//                loginWindow.remove(captchaImg);
-//                captchaImg.updateUI();
                 loginWindow.invalidate();
                 loginWindow.repaint();
                 loginWindow.revalidate();
-
-//                System.out.println("你点击了一次验证码 验证码是"+captcha.getCaptchaCode());
             }
         });
-
     }
-
 }

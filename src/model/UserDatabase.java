@@ -7,26 +7,17 @@ import java.util.Vector;
  * Created by tuchang on 24/02/2017.
  */
 public class UserDatabase {
-    void model(){}
-
     String driver = "com.mysql.jdbc.Driver";
     String url = "jdbc:mysql://localhost:3306/JDBCTest?useUnicode=true&characterEncoding=utf-8";
     String user = "root";
     String pwd = "fortest";
-
     String sql = null;
     Connection conn =null;
     Statement st = null;
     ResultSet rs = null;
-
-
     int type ;
-
-
     void init()
     {
-
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url,user,pwd);
@@ -36,26 +27,18 @@ public class UserDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
     void close()
     {
         try {
-            rs.close();
-            st.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     public void createUser(Vector inputTable)
     {
         init();
-
-
-
         for(int i=0;i<inputTable.size();i++)
         {
             if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("系统管理员"))
@@ -68,26 +51,18 @@ public class UserDatabase {
                 type = 1;
             if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("学生"))
                 type = 2;
-
-
-
             sql = "insert into user_table values(null,'"
                     +((Vector)inputTable.elementAt(i)).elementAt(0)+"','"
                     +((Vector)inputTable.elementAt(i)).elementAt(1)+"',"
-//                    +((Vector)inputTable.elementAt(i)).elementAt(2)+");";
                     +type+");";
-//            System.out.println(sql);
             try {
                 st.execute(sql);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-
-
         close();
     }
-
     public void changeUser(Vector inputTable)
     {
         init();
@@ -108,22 +83,16 @@ public class UserDatabase {
             sql = "update user_table set user_pwd='"
                     +((Vector)inputTable.elementAt(i)).elementAt(1)
                     + "',"
-//                    + "user_type="+((Vector)inputTable.elementAt(i)).elementAt(2)
                     + "user_type="+type
                     + " where user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
         }
-
-//        System.out.println(sql);
-
         try {
             st.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         close();
     }
-
     public void closeUser(Vector inputTable)
     {
         System.out.println("暂未实现，敬请期待");
@@ -131,10 +100,10 @@ public class UserDatabase {
     }
 
     //彻底删除用户
-    public void deleteUser(Vector inputTable)
+    public boolean deleteUser(Vector inputTable)
     {
+        boolean b=false;
         init();
-
         for (int i=0;i<inputTable.size();i++)
         {
             if((((Vector)inputTable.elementAt(i)).elementAt(2)).equals("系统管理员"))
@@ -153,17 +122,14 @@ public class UserDatabase {
                     + " user_type="+type
                     + " user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
         }
-
-
         try {
             st.execute(sql);
+            b=true;
         } catch (SQLException e) {
             e.printStackTrace();
+            return b;
         }
-
         close();
-
+        return b;
     }
-
-
 }

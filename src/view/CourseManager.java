@@ -14,13 +14,10 @@ import java.awt.event.WindowEvent;
  * Created by tuchang on 22/02/2017.
  */
 public class CourseManager {
-
-
     JFrame courseManagerWindow = new JFrame("课程管理");
     JButton createCourseButton = new JButton("创建新课程");
     JButton changeCourseButton = new JButton("修改课程");
-    JButton gradeButton = new JButton("成绩录入/修改成绩");//希望增加Excel格式导入
-
+    JButton gradeButton = new JButton("成绩录入/修改成绩");
     String[] courseTitles = {"课程编号","课程名称","教师编号","教师名称","上课时间","上课地点","学期代号","课程描述"};
     DefaultTableModel courseModel = new DefaultTableModel(new Object[1][8], courseTitles);
     DefaultTableModel courseModel2 = new DefaultTableModel(new Object[1][8], courseTitles){
@@ -37,11 +34,9 @@ public class CourseManager {
     DefaultTableModel gradeModel = new DefaultTableModel(new Object[1][4],gradeTitles);
     JTable courseTable = new JTable();
     JPanel jp = new JPanel();
-
     JLabel jl = new JLabel();
     JButton confirm = new JButton("确认");
     int flag = -1;
-
     void view()
     {
         courseManagerWindow.setLayout(new FlowLayout());
@@ -53,13 +48,10 @@ public class CourseManager {
         jp.setLayout(new BorderLayout());
         courseManagerWindow.setVisible(true);
         courseManagerWindow.setSize(800,600);
-
         jp.add(courseTable.getTableHeader(),BorderLayout.NORTH);
         jp.add(courseTable);
         jp.add(confirm,BorderLayout.SOUTH);
-
         courseModel2.setValueAt("自动",0,0);
-
         createCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,7 +61,6 @@ public class CourseManager {
                 flag = 0;
             }
         });
-
         changeCourseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,17 +70,14 @@ public class CourseManager {
                 flag = 1;
             }
         });
-
         gradeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jl.setText("录入/修改成绩");
                 flag = 2;
                 courseTable.setModel(gradeModel);
-
             }
         });
-
         confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,12 +91,8 @@ public class CourseManager {
                     case 2:new CourseListener().setGrade(gradeModel.getDataVector());
                         break;
                 }
-
-
             }
         });
-
-
         courseManagerWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -116,7 +100,7 @@ public class CourseManager {
                 Admin.adminWindow.setVisible(true);
             }
         });
-
-
     }
 }
+
+//希望增加Excel格式导入成绩

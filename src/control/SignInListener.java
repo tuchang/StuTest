@@ -4,11 +4,9 @@ import model.LoginDatabase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import view.*;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import static control.LoginControl.*;
 
 /**
@@ -22,34 +20,25 @@ public class SignInListener implements ActionListener
         String usr = null;
         String pwd = null;
         String tpye = null;
-
         public String getUsr() {
             return usr;
         }
-
         public String getPwd() {
             return pwd;
         }
-
         public String getTpye() {
             return tpye;
         }
-
         public void setUsr(String usr) {
             this.usr = usr;
         }
-
         public void setPwd(String pwd) {
             this.pwd = pwd;
         }
-
         public void setTpye(String tpye) {
             this.tpye = tpye;
         }
     }
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
@@ -59,7 +48,6 @@ public class SignInListener implements ActionListener
         Admin2 adminView2 = (Admin2) applicationContext.getBean("adminView2");
         Admin2 adminView3 = (Admin2) applicationContext.getBean("adminView2");
         LoginDatabase loginModel = (LoginDatabase) applicationContext.getBean("loginModel");
-
         //判断用户名是否为空
         if (username.getText().isEmpty()||username.getText()==null)
         {
@@ -71,16 +59,12 @@ public class SignInListener implements ActionListener
             JOptionPane.showMessageDialog(new JFrame(), "请输入密码", "提示", JOptionPane.WARNING_MESSAGE);
             return ;
         }
-
         LoginData lg = loginModel.getLoginData(username.getText());
-//        System.out.println(lg.getTpye());
-//        System.out.println(type.getSelectedIndex());
         if (lg.getUsr()==null)
         {
             JOptionPane.showMessageDialog(new JFrame(), "用户名或密码错误", "登陆失败", JOptionPane.WARNING_MESSAGE);
             return;
         }
-//        System.out.println(lg);
         if (!lg.getTpye().equals(String.valueOf(type.getSelectedIndex())))
         {
             JOptionPane.showMessageDialog(new JFrame(), "登陆失败", "提示", JOptionPane.WARNING_MESSAGE);
@@ -94,15 +78,15 @@ public class SignInListener implements ActionListener
             {
                 case 0:adminView.adminView(Integer.parseInt(lg.getUsr()));
                     break;
-                case 1:facultyView.view(Integer.parseInt(lg.getUsr()));//temp_id = 1;
+                case 1:facultyView.view(Integer.parseInt(lg.getUsr()));
                     break;
-                case 2:studentView.view(Integer.parseInt(lg.getUsr()));//temp_id = 1;
+                case 2:studentView.view(Integer.parseInt(lg.getUsr()));
                     break;
                 case 3:adminView2.adminView(Integer.parseInt(lg.getUsr()));
                     break;
                 case 4:adminView3.adminView(Integer.parseInt(lg.getUsr()));
                     break;
-                //default:System.out.println(type.getItemCount());
+                default:break;
             }
         }
         else if (!captchaText.getText().equals(captcha.getCaptchaCode()))
