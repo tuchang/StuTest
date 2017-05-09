@@ -1,5 +1,8 @@
 package view;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +24,11 @@ public class Admin2 {
 
     public void adminView(int id)
     {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+        UserManager userManager = (UserManager) applicationContext.getBean("userManagerView");
+        StuManager stuManager = (StuManager) applicationContext.getBean("studentManagerView");
+        CourseManager courseManager = (CourseManager) applicationContext.getBean("courseManagerView");
+        NoticeManager noticeManagerView = (NoticeManager) applicationContext.getBean("noticeManagerView");
 
         adminWindow= new JFrame("欢迎登陆，管理员");
 
@@ -35,11 +43,13 @@ public class Admin2 {
         adminWindow.setVisible(true);
         adminWindow.setSize(800,300);
 
+
+
         stuManageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adminWindow.setVisible(false);
-                new view.StuManager().view();
+                stuManager.view();
 
             }
         });
@@ -49,7 +59,7 @@ public class Admin2 {
 
             public void actionPerformed(ActionEvent e) {
                 adminWindow.setVisible(false);
-                new CourseManager().view();
+                courseManager.view();
             }
         });
 
@@ -57,7 +67,7 @@ public class Admin2 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adminWindow.setVisible(false);
-                new NoticeManager().view();
+                noticeManagerView.view();
             }
         });
 
