@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+
+>
+
+
+
+    <bean id="loginView" class="view.Login">
+    </bean>
+    <bean id="studentView" class="view.Student">
+    </bean>
+    <bean id="facultyView" class="view.Faculty">
+    </bean>
+    <bean id="adminView" class="view.Admin">
+    </bean>
+    <bean id="adminView2" class="view.Admin2">
+    </bean>
+    <bean id="adminView3" class="view.Admin2">
+    </bean>
+
+    <bean id="userManagerView" class="view.UserManager">
+    </bean>
+    <bean id="courseManagerView" class="view.CourseManager">
+    </bean>
+    <bean id="studentManagerView" class="view.StuManager">
+    </bean>
+    <bean id="noticeManagerView" class="view.NoticeManager">
+    </bean>
+
+    <bean id="loginModel" class="model.LoginDatabase">
+    </bean>
+    <bean id="userModel" class="model.UserDatabase">
+    </bean>
+    <bean id="courseModel" class="model.CourseDatabase">
+    </bean>
+    <bean id="gradeModel" class="model.GradeDatabase">
+    </bean>
+    <bean id="studentModel" class="model.StuManageDatabase">
+    </bean>
+    <bean id="noticeModel" class="model.NoticeDatabase">
+    </bean>
+    <bean id="rosterModel" class="model.Roster">
+    </bean>
+
+
+
+
+</beans>

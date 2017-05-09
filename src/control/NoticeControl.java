@@ -2,6 +2,8 @@ package control;
 
 import Test.FileTest;
 import model.NoticeDatabase;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -13,6 +15,8 @@ import java.time.LocalTime;
  * Created by tuchang on 27/02/2017.
  */
 public class NoticeControl {
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+    NoticeDatabase noticeModel = (NoticeDatabase) applicationContext.getBean("noticeModel");
     public void createNotice(String title, String content)
     {
 
@@ -92,7 +96,7 @@ public class NoticeControl {
 
 
 
-        new NoticeDatabase().createNotice(input);
+        noticeModel.createNotice(input);
 
 
 
@@ -102,7 +106,7 @@ public class NoticeControl {
 
     public void changeNotice(int id,String title,String content)
     {
-        String path = new NoticeDatabase().getPath(id);
+        String path = noticeModel.getPath(id);
         String abstractString;
         if (content.length()>20)
         {
@@ -137,7 +141,7 @@ public class NoticeControl {
             e.printStackTrace();
         }
 
-        new NoticeDatabase().changeNotice(input,id);
+        noticeModel.changeNotice(input,id);
 
 
     }
@@ -145,12 +149,12 @@ public class NoticeControl {
     public String[][] showNotice()
     {
 
-        return new NoticeDatabase().showNotice();
+        return noticeModel.showNotice();
     }
 
     public String watchNotice(int id)
     {
-        String path = new NoticeDatabase().watchNotice(id);
+        String path = noticeModel.watchNotice(id);
         File f = new File(path);
 //        System.out.println(path);
         try {
@@ -171,7 +175,7 @@ public class NoticeControl {
 
     private int calculateId()
     {
-        return new NoticeDatabase().getMaxId()+1;
+        return noticeModel.getMaxId()+1;
     }
 
 }

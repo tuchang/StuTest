@@ -1,19 +1,20 @@
 package control;
 
-import view.Faculty;
-import view.StuManager;
-
-import java.util.Vector;
+import model.StuManageDatabase;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Created by tuchang on 23/02/2017.
  */
 public class FacultyListener {
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+    StuManageDatabase studentModel = (StuManageDatabase) applicationContext.getBean("studentModel");
     String[][] members = null;
     public String[][] queryStu(int itemtype, String queryText)
     {
 
-        members = new model.StuManageDatabase().queryStu(itemtype,queryText);
+        members = studentModel.queryStu(itemtype,queryText);
         return members;
     }
 }

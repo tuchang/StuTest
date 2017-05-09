@@ -14,6 +14,8 @@ import java.awt.event.WindowEvent;
  * Created by tuchang on 22/02/2017.
  */
 public class CourseManager {
+
+
     JFrame courseManagerWindow = new JFrame("课程管理");
     JButton createCourseButton = new JButton("创建新课程");
     JButton changeCourseButton = new JButton("修改课程");

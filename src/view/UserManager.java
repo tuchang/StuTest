@@ -1,6 +1,8 @@
 package view;
 
 import model.UserDatabase;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -33,6 +35,9 @@ public class UserManager {
 
     void view()
     {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+        UserDatabase userDatabase = (UserDatabase) applicationContext.getBean("userModel");
+
         userManagerWindow.setLayout(new FlowLayout());
         userManagerWindow.add(createUserButton);
         userManagerWindow.add(changeUserButton);
@@ -79,13 +84,12 @@ public class UserManager {
             public void actionPerformed(ActionEvent e) {
                 switch (flag)
                 {
-                    case 0: new UserDatabase().createUser(userTableModel.getDataVector());
+                    case 0: userDatabase.createUser(userTableModel.getDataVector());
                         break;
-                    case 1: new UserDatabase().changeUser(userTableModel.getDataVector());
+                    case 1: userDatabase.changeUser(userTableModel.getDataVector());
                         break;
                     case 2:
-//                        new UserDatabase().closeUser();
-                        new UserDatabase().deleteUser(userTableModel.getDataVector());
+                        userDatabase.deleteUser(userTableModel.getDataVector());
                         break;
                 }
             }
@@ -93,7 +97,6 @@ public class UserManager {
         userManagerWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //Login.loginWindow.setVisible(true);
                 Admin.adminWindow.setVisible(true);
                 userManagerWindow.dispose();
             }

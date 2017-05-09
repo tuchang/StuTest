@@ -3,31 +3,38 @@ package control;
 import model.CourseDatabase;
 import model.GradeDatabase;
 import model.Roster;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import javax.swing.*;
 import java.util.Vector;
 
 /**
  * Created by tuchang on 27/02/2017.
  */
 public class CourseListener {
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+    CourseDatabase courseModel = (CourseDatabase) applicationContext.getBean("courseModel");
+    GradeDatabase gradeModel = (GradeDatabase) applicationContext.getBean("gradeModel");
+    Roster rosterModel = (Roster) applicationContext.getBean("rosterModel");
     public void createCourse(Vector dataVector)
     {
-        new CourseDatabase().createCourse(dataVector);
+        courseModel.createCourse(dataVector);
     }
 
     public void changeCourse(Vector dataVector)
     {
-        new CourseDatabase().changeCourse(dataVector);
+        courseModel.changeCourse(dataVector);
     }
 
     public void setGrade(Vector dataVector)
     {
-        new GradeDatabase().setGrade(dataVector);
+        gradeModel.setGrade(dataVector);
     }
 
     public String[][] getGrade(int id)
     {
-        String[][] temp = new GradeDatabase().getGrade(id);
+        String[][] temp = gradeModel.getGrade(id);
         String[][] gradeItem = new String[temp.length][4] ;
         for (int i=0; i<temp.length;i++)
         {
@@ -36,7 +43,6 @@ public class CourseListener {
             gradeItem[i][2] = String.valueOf(id);
             gradeItem[i][3] = temp[i][2];
 //            System.out.print("temp[i][0]:"+temp[i][0]);
-
         }
 
         return gradeItem;
@@ -44,24 +50,31 @@ public class CourseListener {
 
     public String[][] queryCourse(int id,int type)
     {
-        return new CourseDatabase().queryCourse(id,type);
+        return courseModel.queryCourse(id,type);
     }
 
     public boolean addCourse(int stu_id,int course_id)
     {
-        return new CourseDatabase().addCourse(stu_id,course_id);
+        return courseModel.addCourse(stu_id,course_id);
     }
 
     public boolean output(int course_id)
     {
-        if (new Roster().output(course_id))
+        try{
+            if (rosterModel.output(course_id))
+            {
+                JOptionPane.showMessageDialog(new JFrame(), "导出成功", "提示", JOptionPane.WARNING_MESSAGE);
+                return true;
+            }
+            else {
+                JOptionPane.showMessageDialog(new JFrame(), "导出失败", "提示", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        }catch (Exception e)
         {
-            System.out.println("导出成功");
-            return true;
-        }
-        else {
-            System.out.println("导出失败");
+            JOptionPane.showMessageDialog(new JFrame(), "导出失败", "提示", JOptionPane.WARNING_MESSAGE);
             return false;
         }
+
     }
 }

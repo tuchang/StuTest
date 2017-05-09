@@ -1,6 +1,7 @@
 package view;//import control.SignIn;
 
 import Test.Captcha;
+import control.SignInListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +15,11 @@ import static control.LoginControl.*;
 public class Login {
     public static JFrame loginWindow = new JFrame("欢迎登录");
     public static JPanel jp = new JPanel();
-    public static void main(String[] args)
+    public static void view()
     {
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+//        SignInListener signInListener = (SignInListener) applicationContext.getBean("signInListener");
+
         jp.add(captchaImg);
 
         type.addItem("管理员");
@@ -50,7 +54,7 @@ public class Login {
             }
         });
 
-        signIn.addActionListener(new control.SignInListener());
+        signIn.addActionListener(new SignInListener());
 
         exit.addActionListener(new ActionListener() {
             @Override
