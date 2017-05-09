@@ -192,7 +192,6 @@ public class StuManager {
 //                System.out.println("flag."+flag);
 //                System.out.println(new StuManagerListener().control(flag,queryItem.getSelectedIndex(),queryField.getText()
 //                        ,stuTableModel.getDataVector()));
-
                 switch(flag)
                 {
                     //弹框新建学生信息 成功/新建失败
@@ -233,8 +232,11 @@ public class StuManager {
             @Override
             public void windowClosing(WindowEvent e) {
                 //System.out.println("hehe");
-                Admin.adminWindow.setVisible(true);
+
+                stuManagerWindow.remove(queryItem);
+                stuManagerWindow.remove(queryField);
                 stuManagerWindow.dispose();
+                Admin.adminWindow.setVisible(true);
             }
         });
 

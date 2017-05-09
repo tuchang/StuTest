@@ -49,7 +49,4 @@
     <bean id="rosterModel" class="model.Roster">
     </bean>
 
-
-
-
 </beans>

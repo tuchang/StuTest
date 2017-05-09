@@ -3,6 +3,7 @@ package view;
 import model.UserDatabase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import service.LogInterface;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ import java.awt.event.WindowEvent;
 /**
  * Created by tuchang on 22/02/2017.
  */
-public class UserManager {
+public class UserManager implements LogInterface {
     JFrame userManagerWindow = new JFrame("用户管理");
     JButton createUserButton = new JButton("创建新用户");
     JButton changeUserButton = new JButton("修改用户");
@@ -33,7 +34,7 @@ public class UserManager {
 
     int flag = -1;
 
-    void view()
+    public void view()
     {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
         UserDatabase userDatabase = (UserDatabase) applicationContext.getBean("userModel");
