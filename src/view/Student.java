@@ -44,13 +44,15 @@ public class Student {
 
     JPanel jp2 = new JPanel(new BorderLayout());
     JTextField title = new JTextField();
-    JTextArea content = new JTextArea(40,30);
+    JTextArea content = new JTextArea(20,30);
+    JScrollPane jScrollPane2 = new JScrollPane(content);
 
     public void view(int id)
     {
         studentWindowTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
+        jScrollPane2.setSize(content.getSize());
+        jScrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         stuWindow.setLayout(new FlowLayout());
         stuWindow.add(queryStuButton);
@@ -72,7 +74,8 @@ public class Student {
         jp.add(confirm,BorderLayout.SOUTH);
 
         jp2.add(title,BorderLayout.NORTH);
-        jp2.add(content);
+//        jp2.add(content);
+        jp2.add(jScrollPane2);
         jp2.add(confirm,BorderLayout.SOUTH);
 
         queryStuButton.addActionListener(new ActionListener() {

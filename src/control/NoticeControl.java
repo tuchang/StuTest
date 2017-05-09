@@ -6,11 +6,8 @@ import model.NoticeDatabase;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 /**
  * Created by tuchang on 27/02/2017.
@@ -24,6 +21,7 @@ public class NoticeControl {
 
         String path = new Thread().currentThread().getContextClassLoader().getResource("")+"../../../NoticeArchive/"+ calculateId()+".txt";
         //获得当前路径后前面会有一段file: 需要去掉 不然mac端无法createNewFile
+        System.out.println(path);
         if(path.contains("file:"))
         {
             URL url = FileTest.class.getResource("");
@@ -32,9 +30,9 @@ public class NoticeControl {
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
-
-
         }
+
+        System.out.println(path);
 
 
 
@@ -154,7 +152,7 @@ public class NoticeControl {
     {
         String path = new NoticeDatabase().watchNotice(id);
         File f = new File(path);
-
+//        System.out.println(path);
         try {
             FileInputStream fis = new FileInputStream(f);
             byte[] b = new byte[fis.available()];

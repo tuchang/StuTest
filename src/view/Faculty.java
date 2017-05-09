@@ -25,6 +25,7 @@ public class Faculty {
     JTextField title = new JTextField("请输入标题");
     JTextArea content = new JTextArea("请输入公告内容。",30,40);
     JPanel jp2 = new JPanel();
+    JScrollPane jScrollPane2 = new JScrollPane(content);
 
 
 
@@ -59,6 +60,9 @@ public class Faculty {
 //        facultyWindowTable.setSize(900,500);
 //        facultyWindowTable.setPreferredSize(new Dimension(900,500));
 
+        jScrollPane2.setSize(content.getSize());
+        jScrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
         jp.setPreferredSize(new Dimension(900,500));//!!
 //        System.out.println("jp:"+jp.getSize());
 
@@ -70,7 +74,8 @@ public class Faculty {
 
         jp2.setLayout(new BorderLayout());
         jp2.add(title,BorderLayout.NORTH);
-        jp2.add(content);
+//        jp2.add(content);
+        jp2.add(jScrollPane2);
         jp2.add(confirm,BorderLayout.SOUTH);
 
         facultyWindow.setLayout(new FlowLayout());

@@ -31,3 +31,4 @@ url + getAbsolutePath
 
 文本框大小
 size preferredsize
+JOptionPane.showMessageDialog(frame, "请输入用户名", "提示", JOptionPane.WARNING_MESSAGE);

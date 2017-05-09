@@ -31,6 +31,7 @@ public class NoticeManager {
 
      JTextField title = new JTextField("请输入标题");
      JTextArea content = new JTextArea("请输入公告内容。",30,40);
+     JScrollPane jScrollPane2 = new JScrollPane(content);
      JButton confirm = new JButton("确认");
      int flag = -1;
 
@@ -43,6 +44,8 @@ public class NoticeManager {
     {
         noticeTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane2.setSize(content.getSize());
+        jScrollPane2.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 
         noticeManagerWindow.setLayout(new FlowLayout());
@@ -65,7 +68,8 @@ public class NoticeManager {
         jp.add(confirm,BorderLayout.SOUTH);
 
         jp2.add(title,BorderLayout.NORTH);
-        jp2.add(content);
+//        jp2.add(content);
+        jp2.add(jScrollPane2);
         jp2.add(confirm,BorderLayout.SOUTH);
 
 

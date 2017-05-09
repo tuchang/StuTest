@@ -45,7 +45,7 @@ public class StuManager {
 
 
     JComboBox queryItem = new JComboBox(titles);
-    JTextField queryField = new JTextField("请输入查询文本");
+    JTextField queryField = new JTextField("请输入查询文本",15);
 
 
 
@@ -75,7 +75,7 @@ public class StuManager {
 
 
         stuManagerWindow.setVisible(true);
-        stuManagerWindow.setSize(1800,600);
+        stuManagerWindow.setSize(1600,600);
         //jp.setSize(400,600);
 
 

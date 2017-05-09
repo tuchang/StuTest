@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.*;
-import java.util.Vector;
 
 /**
  * Created by tuchang on 27/02/2017.
@@ -39,8 +38,8 @@ public class NoticeDatabase {
     void close()
     {
         try {
-            rs.close();
-            st.close();
+//            rs.close();
+//            st.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,13 +97,17 @@ public class NoticeDatabase {
 //                e.printStackTrace();
 //            }
 //        }
+        //!!Windows处理
+        input[4]=input[4].replaceAll("\\\\","\\\\\\\\");
+
+        System.out.println("input[4]:"+input[4]);
         sql = "insert into notice_table values(null,'"
                 +input[0]+"','"
                 +input[1]+"','"
                 +input[2]+"','"
                 +input[3]+"','"
                 +input[4]+"');";
-        System.out.println(sql);
+        System.out.println("sql:"+sql);
         try {
             st.execute(sql);
         } catch (SQLException e) {
@@ -177,10 +180,11 @@ public class NoticeDatabase {
         try {
             rs = st.executeQuery(sql);
             //System.out.println(rs.next());
-            if (rs.next()||rs.getString(1) != null)
+            if (rs.next()&&rs.getString(1) != null)
             {
                 return Integer.parseInt(rs.getString(1));
             }
+            else return 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
