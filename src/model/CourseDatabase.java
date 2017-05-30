@@ -119,7 +119,47 @@ public class CourseDatabase {
         }
         else if(type==2)//学生
         {
-            sql = "select * from course;";
+            String temp[][];
+            try
+            {
+                sql = "select course_id from grade where stu_id="+id+";";
+                rs=st.executeQuery(sql);
+                if(rs.next())
+                {
+                    int rowCount=0;
+                    rs.last();
+                    rowCount = rs.getRow();
+                    rs.first();
+                    resultCourse = new String[rowCount][8];
+                    for (int i =0;i<rowCount;i++)
+                    {
+                        resultCourse[i][0] = rs.getString(1);
+                        rs.next();
+                    }
+                    for (int i =0;i<rowCount;i++)
+                    {
+                        temp = queryCourse(Integer.parseInt(resultCourse[i][0]),0);
+                        //resultCourse[i][0] = temp[i][0];//课程id
+                        resultCourse[i][1] = temp[i][1];//课程名字
+                        resultCourse[i][2] = temp[i][2];//教师id
+                        resultCourse[i][3] = temp[i][3];//教师名称
+                        resultCourse[i][4] = temp[i][4];//时间
+                        resultCourse[i][5] = temp[i][5];//地点
+                        resultCourse[i][6] = temp[i][6];//学期
+                        resultCourse[i][7] = temp[i][7];//描述
+                    }
+
+                }else {
+                    JOptionPane.showMessageDialog(new JFrame(), "查询选课学生结果为空", "提示", JOptionPane.WARNING_MESSAGE);
+                    return null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                close();
+            }
+
+            sql = "select * from course WHERE stu_id = ;";
             try {
                 rs = st.executeQuery(sql);
                 int rowCount=0;
@@ -203,6 +243,7 @@ public class CourseDatabase {
                 for (int i =0;i<rowCount;i++)
                 {
                     stu_id[i] = Integer.parseInt(rs.getString(1));
+                    rs.next();
                 }
             }else {
                 JOptionPane.showMessageDialog(new JFrame(), "查询选课学生结果为空", "提示", JOptionPane.WARNING_MESSAGE);

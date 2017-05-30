@@ -1,5 +1,6 @@
 package model;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.Vector;
 
@@ -52,7 +53,7 @@ public class StuManageDatabase {
                     + ((Vector) inputTables.get(i)).get(7) +"',"
                     + ((Vector) inputTables.get(i)).get(8) +",'"
                     + ((Vector) inputTables.get(i)).get(9) +"','"
-                    + ((Vector) inputTables.get(i)).get(10) +"',"
+                    + ((Vector) inputTables.get(i)).get(10) +"','"
                     + ((Vector) inputTables.get(i)).get(11) +"','"
                     + ((Vector) inputTables.get(i)).get(12) +"','"
                     + ((Vector) inputTables.get(i)).get(13) +"','"
@@ -63,9 +64,12 @@ public class StuManageDatabase {
                     + ((Vector) inputTables.get(i)).get(18) +",'"
                     + ((Vector) inputTables.get(i)).get(19) +"','"
                     + ((Vector) inputTables.get(i)).get(20) +"');";
+            System.out.println(sql);
             st.execute(sql);
+            JOptionPane.showMessageDialog(new JFrame(), "新建学生信息成功", "提示", JOptionPane.WARNING_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(new JFrame(), "新建学生信息失败", "提示", JOptionPane.WARNING_MESSAGE);
         }
         close();
         return new String[1][13];
@@ -109,8 +113,9 @@ public class StuManageDatabase {
     public String[][] queryStu(int itemType, String queryText)
     {
         init();
-        String[][] rss = new String[1][21];
+        String[][] rss = null;
         String type = null;
+        int rowCount = 0;
         switch (itemType)
         {
             case 0: type = "stu_Name";
@@ -175,7 +180,11 @@ public class StuManageDatabase {
         sql = "select * from student_information where "+type+"="+queryText+";";
         try {
             rs = st.executeQuery(sql);
-            for(int i=0;rs.next();i++)
+            rs.last();
+            rowCount = rs.getRow();
+            rss = new String[rowCount][21];
+            rs.first();
+            for(int i=0;i<rowCount;i++)
             {
                 rss[i][0]=rs.getString(1);
                 rss[i][1]=rs.getString(2);
@@ -198,6 +207,7 @@ public class StuManageDatabase {
                 rss[i][18]=rs.getString(19);
                 rss[i][19]=rs.getString(20);
                 rss[i][20]=rs.getString(21);
+                rs.next();
             }
         } catch (SQLException e) {
             e.printStackTrace();

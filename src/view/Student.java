@@ -198,7 +198,7 @@ public class Student {
                     case 1:
 //                        System.out.println("暂未实现");
                         studentTableModel.setDataVector(new CourseListener().queryCourse(id,2),courseTitles);
-
+                        System.out.println("id:"+id);
 
 
 

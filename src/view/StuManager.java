@@ -83,10 +83,10 @@ public class StuManager {
                             new StuManagerListener().control(
                                     flag,-1,null
                                     ,stuTableModel.getDataVector());
-                            JOptionPane.showMessageDialog(new JFrame(), "新建学生信息成功", "提示", JOptionPane.WARNING_MESSAGE);
+                            //JOptionPane.showMessageDialog(new JFrame(), "新建学生信息成功", "提示", JOptionPane.WARNING_MESSAGE);
                         }catch (Exception e1)
                         {
-                            JOptionPane.showMessageDialog(new JFrame(), "新建学生信息失败", "提示", JOptionPane.WARNING_MESSAGE);
+                            //JOptionPane.showMessageDialog(new JFrame(), "新建学生信息失败", "提示", JOptionPane.WARNING_MESSAGE);
                         }
                         break;
                     case 1:

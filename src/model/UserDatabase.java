@@ -118,11 +118,12 @@ public class UserDatabase {
                 type = 2;
 
             sql = "DELETE FROM user_table WHERE user_pwd='"
-                    +((Vector)inputTable.elementAt(i)).elementAt(1) + "',"
+                    +((Vector)inputTable.elementAt(i)).elementAt(1) + "'and"
                     + " user_type="+type
-                    + " user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
+                    + " and user_name ='"+((Vector)inputTable.elementAt(i)).elementAt(0)+"';";
         }
         try {
+            //System.out.println(sql);
             st.execute(sql);
             b=true;
         } catch (SQLException e) {

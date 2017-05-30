@@ -32,6 +32,8 @@ public class NoticeManager {
     int flag = -1;
     void view()
     {
+        noticeManagerWindow.remove(jp);
+        noticeManagerWindow.remove(jp2);
         noticeTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane2.setSize(content.getSize());
@@ -98,6 +100,7 @@ public class NoticeManager {
                 {
                     //新建
                     case 0:new NoticeControl().createNotice(title.getText(),content.getText());
+                    //System.out.println("新建一次");
                         break;
                     //修改
                     case 1:
