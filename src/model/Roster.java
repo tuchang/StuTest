@@ -42,6 +42,7 @@ public class Roster {
         String stu_college;
         String stu_class;
         stu_id = new CourseDatabase().queryStu(course_id);
+        System.out.println(course_id);
         numOfStu = stu_id.length;
         String[][] temp_stu;
         try {
@@ -75,12 +76,17 @@ public class Roster {
             {
                 ((Label)wc).setString(course_id+"-"+course_name+"-任课老师:"+faculty_name);
             }
+            System.out.println("num:"+numOfStu);
         for (int i=0;i<numOfStu;i++)
         {
+            System.out.println("id:"+stu_id[i]);
             temp_stu = new StuManageDatabase().queryStu(1, String.valueOf(stu_id[i]));
             stu_name = temp_stu[0][0];
             stu_college = temp_stu[0][10];
             stu_class = temp_stu[0][13];
+            System.out.println("name:"+stu_name);
+            System.out.println("college:"+stu_college);
+            System.out.println("class:"+stu_class);
             ws.addCell(new Label(0,i+2,String.valueOf(stu_id[i])));
             ws.addCell(new Label(1,i+2,stu_name));
             ws.addCell(new Label(2,i+2,stu_college));
